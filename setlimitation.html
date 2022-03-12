@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Set limitation</title>
     <!-- Material Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
@@ -23,7 +23,7 @@
                 <div class="close" id="close-btn"><span class="material-icons-sharp">close</span></div>
             </div>
             <div class="sidebar">
-                <a href="index.html" class="active"><span class="material-icons-sharp">grid_view</span>
+                <a href="index.html"><span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
                 <a href="temperature.html"><span class="material-icons-sharp">thermostat</span>
@@ -32,7 +32,7 @@
                 <a href="moisture.html"><span class="material-icons-sharp">water_drop</span>
                     <h3>Moisture</h3>
                 </a>
-                <a href="setlimitation.html"><span class="material-icons-sharp">insights</span>
+                <a href="setlimitation.html class=" active""><span class="material-icons-sharp">insights</span>
                     <h3>Set limitation</h3>
                 </a>
                 <a href="device.html"><span class="material-icons-sharp">settings_suggest</span>
@@ -48,115 +48,80 @@
 
         <!-- MAIN SECTION -->
         <main>
-            <h1>Dashboard</h1>
+            <h1>Set limitation</h1>
             <div class="insights">
-                <!-- TEMP SECTION -->
-                <div class="temp">
-                    <span class="material-icons-sharp">thermostat</span>
+                <!-- box SECTION -->
+                <div class="box bigbox">
                     <div class="middle">
-                        <div class="left">
-                            <h3>Temperature</h3>
-                            <h1>32 &#8451;</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36">
-
-                                </circle>
-                                <div class="number">
-                                    <p>32&#8451;</p>
-                                </div>
-                            </svg>
-                        </div>
+                        <span class="material-icons-sharp">thermostat</span>
+                        <h1>Temperature limitation</h1>
                     </div>
-                    <small class="text-muted">Ho Chi Minh City</small>
-                </div>
-                <!-- END TEMP SECTION -->
-                <!-- MOISTURE SECTION -->
-                <div class="moisture">
-                    <span class="material-icons-sharp">water_drop</span>
+                    <h3>Upper limitation:</h3>
                     <div class="middle">
-                        <div class="left">
-                            <h3>Moisture</h3>
-                            <h1>62%</h1>
+                        <div>
+                            <input type="text" id="inputStep" class="date"
+                                placeholder="Input tempareture"><strong>℃</strong>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36">
-
-                                </circle>
-                                <div class="number">
-                                    <p>62%</p>
-                                </div>
-                            </svg>
-                        </div>
+                        <button class="btn">Save changes</button>
                     </div>
-                    <small class="text-muted">Good for plants</small>
-                </div>
-                <!-- END MOISTURE SECTION -->
-                <!-- TIMEUPDATE SECTION -->
-                <div class="updatetime">
-                    <span class="material-icons-sharp">update</span>
+                    <h3>Lower limitation:</h3>
                     <div class="middle">
-                        <div class="left">
-                            <h3>Updated at</h3>
-                            <h1>12:34 AM</h1>
+                        <div>
+                            <input type="text" id="inputStep" class="date"
+                                placeholder="Input tempareture"><strong>℃</strong>
                         </div>
-                        <div class="progress">
-
-                        </div>
+                        <button class="btn">Save changes</button>
                     </div>
-                    <small class="text-muted">11/03/2022</small>
                 </div>
-                <!-- END TIMEUPDATE SECTION -->
+                <div class="box bigbox">
+                    <div class="middle">
+                        <span class="material-icons-sharp">water_drop</span>
+                        <h1>Moisture limitation</h1>
+                    </div>
+                    <h3>Upper limitation:</h3>
+                    <div class="middle">
+                        <div>
+                            <input type="text" placeholder="Input tempareture"><strong>℃</strong>
+                        </div>
+                        <button class="btn">Save changes</button>
+                    </div>
+                    <h3>Lower limitation:</h3>
+                    <div class="middle">
+                        <div>
+                            <input type="text" placeholder="Input tempareture"><strong>℃</strong>
+                        </div>
+                        <button class="btn">Save changes</button>
+                    </div>
+
+                </div>
             </div>
 
-            <!-- LIST OF DEVICES-->
-            <div class="list-devices">
-                <h2>List of Devices</h2>
+            <!-- RECENT ORDERS -->
+            <div class="recent-changes">
+                <h2>Recent changes</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Device Name</th>
-                            <th>Device Number</th>
-                            <th>Status</th>
-                            <th></th>
+                            <th>Data</th>
+                            <th>Edge</th>
+                            <th>Value</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Light System</td>
-                            <td>20</td>
-                            <td class="success">On</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Pump System</td>
-                            <td>2</td>
-                            <td class="danger">Off</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Dome System</td>
-                            <td>4</td>
-                            <td class="danger">Off</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Temperature Sensor</td>
-                            <td>1</td>
-                            <td class="success">On</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Moisture Sensor</td>
-                            <td>2</td>
-                            <td class="success">On</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
+                            <td>Temperature</td>
+                            <td>Upper limitation</td>
 
+                            <td>32℃</td>
+                        </tr>
+                        <tr>
+                            <td>Moisture</td>
+                            <td>Upper limitation</td>
+                            <td>80%</td>
+                        </tr>
                     </tbody>
                 </table>
+                <a href="#">Show all</a>
             </div>
         </main>
 
@@ -246,6 +211,7 @@
         </div>
     </div>
     <script src="./index.js"></script>
+
 </body>
 
 </html>

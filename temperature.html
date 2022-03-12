@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Temperature</title>
     <!-- Material Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
@@ -23,10 +23,10 @@
                 <div class="close" id="close-btn"><span class="material-icons-sharp">close</span></div>
             </div>
             <div class="sidebar">
-                <a href="index.html" class="active"><span class="material-icons-sharp">grid_view</span>
+                <a href="index.html"><span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="temperature.html"><span class="material-icons-sharp">thermostat</span>
+                <a href="temperature.html" class="active"><span class="material-icons-sharp">thermostat</span>
                     <h3>Temperature</h3>
                 </a>
                 <a href="moisture.html"><span class="material-icons-sharp">water_drop</span>
@@ -48,115 +48,63 @@
 
         <!-- MAIN SECTION -->
         <main>
-            <h1>Dashboard</h1>
+            <h1>Temperature</h1>
             <div class="insights">
-                <!-- TEMP SECTION -->
-                <div class="temp">
-                    <span class="material-icons-sharp">thermostat</span>
+                <!-- box SECTION -->
+                <div class="box bigbox">
                     <div class="middle">
                         <div class="left">
-                            <h3>Temperature</h3>
-                            <h1>32 &#8451;</h1>
+                            <span class="material-icons-sharp">thermostat</span>
+                            <h3>Current temperature</h3>
+                            <h1>32 ℃</h1>
+                            <small class="text-muted">1 Minutes ago</small>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36">
-
-                                </circle>
-                                <div class="number">
-                                    <p>32&#8451;</p>
-                                </div>
-                            </svg>
+                        <div class="">
+                            <span class="material-icons-sharp">analytics</span>
+                            <h3>Average temperature</h3>
+                            <h1>32 ℃</h1>
+                            <select name="avg-time" id="">
+                                <option value="1">1 hour ago</option>
+                                <option value="2">6 hours ago</option>
+                                <option value="3">12 hours ago</option>
+                                <option value="4">24 hours ago</option>
+                            </select>
                         </div>
                     </div>
-                    <small class="text-muted">Ho Chi Minh City</small>
+
                 </div>
-                <!-- END TEMP SECTION -->
-                <!-- MOISTURE SECTION -->
-                <div class="moisture">
-                    <span class="material-icons-sharp">water_drop</span>
+                <div class="box bigbox">
                     <div class="middle">
-                        <div class="left">
-                            <h3>Moisture</h3>
-                            <h1>62%</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36">
-
-                                </circle>
-                                <div class="number">
-                                    <p>62%</p>
-                                </div>
-                            </svg>
+                        <span class="material-icons-sharp">analytics</span>
+                        <h1>Temperature Analytics</h1>
+                    </div>
+                    <br>
+                    <div class="date-container">
+                        <p class="date">From:</p>
+                        <input class="date" type="datetime-local">
+                    </div>
+                    <div class="date-container">
+                        <p class="date">To:</p>
+                        <input class="date" type="datetime-local">
+                    </div>
+                    <div class="date-container">
+                        <div class="middle">
+                            <p class="date">Step:</p>
+                            <input type="number" id="inputStep" class="date">
+                            <select name="Time-unit" id="" class="date">
+                                <option value="minute">Minute</option>
+                                <option value="hour">Hour</option>
+                                <option value="day">Day</option>
+                            </select>
                         </div>
                     </div>
-                    <small class="text-muted">Good for plants</small>
-                </div>
-                <!-- END MOISTURE SECTION -->
-                <!-- TIMEUPDATE SECTION -->
-                <div class="updatetime">
-                    <span class="material-icons-sharp">update</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Updated at</h3>
-                            <h1>12:34 AM</h1>
-                        </div>
-                        <div class="progress">
+                    <button type="submit" class="btn">Analize</button>
 
-                        </div>
+                    <div class="chart">
+                        <canvas id="tempChart"></canvas>
                     </div>
-                    <small class="text-muted">11/03/2022</small>
+
                 </div>
-                <!-- END TIMEUPDATE SECTION -->
-            </div>
-
-            <!-- LIST OF DEVICES-->
-            <div class="list-devices">
-                <h2>List of Devices</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Device Name</th>
-                            <th>Device Number</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Light System</td>
-                            <td>20</td>
-                            <td class="success">On</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Pump System</td>
-                            <td>2</td>
-                            <td class="danger">Off</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Dome System</td>
-                            <td>4</td>
-                            <td class="danger">Off</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Temperature Sensor</td>
-                            <td>1</td>
-                            <td class="success">On</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-                        <tr>
-                            <td>Moisture Sensor</td>
-                            <td>2</td>
-                            <td class="success">On</td>
-                            <td class="primary"><a href="#">Details</a></td>
-                        </tr>
-
-                    </tbody>
-                </table>
             </div>
         </main>
 
@@ -246,6 +194,55 @@
         </div>
     </div>
     <script src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = [
+            '2/3 15:00:00',
+            '2/3 15:05:00',
+            '2/3 15:10:00',
+            '2/3 15:15:00',
+            '2/3 15:20:00',
+            '2/3 15:25:00',
+            '2/3 15:30:00',
+            '2/3 15:35:00'
+        ];
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Average Celcius degree',
+                    backgroundColor: 'rgba(255,0,0,1)',
+                    data: [28, 29, 32, 28, 29, 30, 28, 30],
+                    borderColor: 'rgba(255,0,0,0.5)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointHoverBorderWidth: 10
+                }
+            ]
+        };
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Average Temperature from ... to...'
+                    }
+                },
+                scales: {
+                    y: {
+                        suggestedMin: 25,
+                        suggestedMax: 40
+                    }
+                }
+            }
+        };
+        const tempChar = new Chart(
+            document.getElementById('tempChart'),
+            config
+        );
+    </script>
 </body>
 
 </html>
