@@ -463,7 +463,6 @@ main .list-devices a{
 }
 
 
-
 /* ================= MEDEIA QUERIES ============= */
 @media screen and (max-width: 1200px) {
     .container{
@@ -601,23 +600,3 @@ main .list-devices a{
         font-size: 2rem;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
