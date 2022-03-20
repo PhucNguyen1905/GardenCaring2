@@ -37,9 +37,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("background.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: var(--color-background);
 }
 
 body .logo {
@@ -58,47 +56,77 @@ body .logo h2{
 
 body form{
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
+    grid-column-gap: 50px;
     align-items: center;
-    width: 400px;
+    width: 40%;
     padding: 20px;
-    box-shadow: var(--box-shadow);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
     border-radius: var(--border-radius-3);
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--color-background);
     color: #fff;
+    margin-bottom: 100px;
 }
 
 body form h1{
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     margin-bottom: 20px;
     text-align: center;
+    color: var(--color-dark);
 }
 
-body form label{
+body form .line{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-gap: 10px;
+    align-items: center;
+}
+
+body form .line .col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+body form .line .col input{
+    width: 100%;
+}
+
+body form .line .bigInput{
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+
+body form .line .shortInput{
+    max-width: 250px;
+}
+
+body form div label{
     font-size: 14px;
     font-weight: 400;
+    color: var(--color-dark);
 }
 
-body form input[type=password],
-body form input[type=text]{
+body form div input[type=email],
+body form div input[type=password],
+body form div input[type=text]{
     padding: 10px;
     background: #fff;
     border-radius: 10px;
     font-size: 14px;
     line-height: 14px;
     font-weight: 300;
+    background: var(--color-info-light);
 }
 
-body form .rem{
-    grid-column-start: 2;
-    grid-column-end: 3;
-}
 
 body form .sign{
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     display: flex;
     justify-content: center;
 }
@@ -114,12 +142,31 @@ body form .sign button{
     cursor: pointer;
 }
 
-body form .sign1{
-    grid-column-start: 1;
-    grid-column-end: 3;
-    text-align: left;
+@media (max-width: 1000px) {
+    body form{
+        width: 50%;
+    }
 }
 
-body form .sign1 a{
-    color: white;
+@media (max-width: 827px) {
+    body form{
+        width: 60%;
+    }
+}
+
+@media (max-width: 772px) {
+    body form .line{
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+    }
+    body form .line .col{
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+}
+
+@media (max-width: 650px) {
+    body form{
+        width: 80%;
+    }
 }

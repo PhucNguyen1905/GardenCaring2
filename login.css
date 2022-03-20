@@ -37,7 +37,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("background.jpeg");
+    background: var(--color-background);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -65,7 +65,7 @@ body form{
     padding: 20px;
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius-3);
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--color-background);
     color: #fff;
 }
 
@@ -74,11 +74,13 @@ body form h1{
     grid-column-end: 3;
     margin-bottom: 20px;
     text-align: center;
+    color: var(--color-dark);
 }
 
 body form label{
     font-size: 14px;
     font-weight: 400;
+    color: var(--color-dark);
 }
 
 body form input[type=password],
@@ -89,6 +91,7 @@ body form input[type=text]{
     font-size: 14px;
     line-height: 14px;
     font-weight: 300;
+    background: var(--color-info-light);
 }
 
 body form .rem{
