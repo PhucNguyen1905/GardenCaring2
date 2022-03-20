@@ -15,12 +15,49 @@
     </div>
     <form action="/login">
         <h1>Register</h1>
-        <label for="user">Username:</label>
-        <input type="text" required id="user">
-        <label for="pwd">Password:</label>
-        <input type="password" required id="pwd">
-        <label for="pwd2">Repeat password:</label>
-        <input type="password" id="pwd2">
+        <div class="line">
+            <div>
+                <label for="">Name:</label>
+            </div>
+            <div class="col">
+                <input type="text" id="fname" placeholder="First name">
+                
+            </div>
+            <div class="col">
+                <input type="text" id="lname" placeholder="Last name">
+                
+            </div>
+        </div>
+        <div class="line">
+            <label for="email">Email:</label>
+            <input class="bigInput" type="email" name="email" id="email" placeholder="Your email">
+        </div>
+        <div class="line">
+            <label for="address">Address:</label>
+            <input class="bigInput" type="text" id="address" placeholder="Your address"> 
+        </div>
+        <div class="line">
+            <label for="adaname">Ada name:</label>
+            <input class="bigInput" type="text" id="adaname" placeholder="Your ada name">
+        </div>
+        <div class="line">
+            <label for="adakey">Ada key:</label>
+            <input class="bigInput" type="text" name="adakey" id="adakey" placeholder="Your ada key">
+        </div>
+        <br>
+        <div class=" line">
+            <label for="user">Username:</label>
+            <input class="bigInput " type="text" required id="user" placeholder="Username">
+        </div>
+        <div class="line">
+            <label for="pwd">Password:</label>
+            <input class="bigInput " type="password" required id="pwd" placeholder="Password">
+        </div>
+        <div class="line">
+            <label for="pwd2">Repeat password:</label>
+            <input class="bigInput " type="password" id="pwd2" placeholder="Repeat password">
+        </div>
+        
         <div class="sign">
             <button>Submit</button>
         </div>
