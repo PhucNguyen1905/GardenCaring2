@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set limitation</title>
+    <title>Moisture</title>
     <!-- Material Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -17,29 +17,29 @@
         <aside>
             <div class="top">
                 <div class="logo">
-                    <img src="./images/logo.png" alt="">
+                    <img src="/images/logo.png" alt="">
                     <h2>Garden<span class="primary">Care</span></h2>
                 </div>
                 <div class="close" id="close-btn"><span class="material-icons-sharp">close</span></div>
             </div>
             <div class="sidebar">
-                <a href="index.html"><span class="material-icons-sharp">grid_view</span>
+                <a href="/"><span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="temperature.html"><span class="material-icons-sharp">thermostat</span>
+                <a href="/temp"><span class="material-icons-sharp">thermostat</span>
                     <h3>Temperature</h3>
                 </a>
-                <a href="moisture.html"><span class="material-icons-sharp">water_drop</span>
+                <a href="/moist" class="active"><span class="material-icons-sharp">water_drop</span>
                     <h3>Moisture</h3>
                 </a>
-                <a href="setlimitation.html" class="active"><span class="material-icons-sharp">insights</span>
+                <a href="/limit"><span class="material-icons-sharp">insights</span>
                     <h3>Set limitation</h3>
                 </a>
-                <a href="device.html"><span class="material-icons-sharp">settings_suggest</span>
+                <a href="/device"><span class="material-icons-sharp">settings_suggest</span>
                     <h3>Controll</h3>
                 </a>
 
-                <a href="#"><span class="material-icons-sharp">logout</span>
+                <a href="/login"><span class="material-icons-sharp">logout</span>
                     <h3>Log Out</h3>
                 </a>
 
@@ -48,80 +48,63 @@
 
         <!-- MAIN SECTION -->
         <main>
-            <h1>Set limitation</h1>
+            <h1>Moisture</h1>
             <div class="insights">
                 <!-- box SECTION -->
                 <div class="box bigbox">
                     <div class="middle">
-                        <span class="material-icons-sharp">thermostat</span>
-                        <h1>Temperature limitation</h1>
-                    </div>
-                    <h3>Upper limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" id="inputStep" class="date"
-                                placeholder="Input tempareture"><strong>℃</strong>
+                        <div class="left">
+                            <span class="material-icons-sharp">water_drop</span>
+                            <h3>Current moisture</h3>
+                            <h1>60 %</h1>
+                            <small class="text-muted">1 Minutes ago</small>
                         </div>
-                        <button class="btn">Save changes</button>
-                    </div>
-                    <h3>Lower limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" id="inputStep" class="date"
-                                placeholder="Input tempareture"><strong>℃</strong>
+                        <div class="">
+                            <span class="material-icons-sharp">analytics</span>
+                            <h3>Average moisture</h3>
+                            <h1>50 %</h1>
+                            <select name="avg-time" id="">
+                                <option value="1">1 hour ago</option>
+                                <option value="2">6 hours ago</option>
+                                <option value="3">12 hours ago</option>
+                                <option value="4">24 hours ago</option>
+                            </select>
                         </div>
-                        <button class="btn">Save changes</button>
                     </div>
+
                 </div>
                 <div class="box bigbox">
                     <div class="middle">
-                        <span class="material-icons-sharp">water_drop</span>
-                        <h1>Moisture limitation</h1>
+                        <span class="material-icons-sharp">analytics</span>
+                        <h1>Moisture Analytics</h1>
                     </div>
-                    <h3>Upper limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" placeholder="Input tempareture"><strong>℃</strong>
-                        </div>
-                        <button class="btn">Save changes</button>
+                    <br>
+                    <div class="date-container">
+                        <p class="date">From:</p>
+                        <input class="date" type="datetime-local">
                     </div>
-                    <h3>Lower limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" placeholder="Input tempareture"><strong>℃</strong>
+                    <div class="date-container">
+                        <p class="date">To:</p>
+                        <input class="date" type="datetime-local">
+                    </div>
+                    <div class="date-container">
+                        <div class="middle">
+                            <p class="date">Step:</p>
+                            <input type="number" id="inputStep" class="date">
+                            <select name="Time-unit" id="" class="date">
+                                <option value="minute">Minute</option>
+                                <option value="hour">Hour</option>
+                                <option value="day">Day</option>
+                            </select>
                         </div>
-                        <button class="btn">Save changes</button>
+                    </div>
+                    <button type="submit" class="btn">Analize</button>
+
+                    <div class="chart">
+                        <canvas id="moistureChart"></canvas>
                     </div>
 
                 </div>
-            </div>
-
-            <!-- RECENT ORDERS -->
-            <div class="recent-changes">
-                <h2>Recent changes</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Edge</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Temperature</td>
-                            <td>Upper limitation</td>
-
-                            <td>32℃</td>
-                        </tr>
-                        <tr>
-                            <td>Moisture</td>
-                            <td>Upper limitation</td>
-                            <td>80%</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="#">Show all</a>
             </div>
         </main>
 
@@ -140,7 +123,7 @@
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="./images/profile-1.jpg" alt="">
+                        <img src="/images/profile-1.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -149,7 +132,7 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="./images/profile-2.jpg" alt="">
+                            <img src="/images/profile-2.jpg" alt="">
                         </div>
                         <div class="message">
                             <p><b>Light System</b> was turned on</p>
@@ -158,7 +141,7 @@
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="./images/profile-2.jpg" alt="">
+                            <img src="/images/profile-2.jpg" alt="">
                         </div>
                         <div class="message">
                             <p><b>Dome System</b> was closed</p>
@@ -167,7 +150,7 @@
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="./images/profile-2.jpg" alt="">
+                            <img src="/images/profile-2.jpg" alt="">
                         </div>
                         <div class="message">
                             <p><b>Pump System</b> was turned off</p>
@@ -211,7 +194,55 @@
         </div>
     </div>
     <script src="./index.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = [
+            '2/3 15:00:00',
+            '2/3 15:05:00',
+            '2/3 15:10:00',
+            '2/3 15:15:00',
+            '2/3 15:20:00',
+            '2/3 15:25:00',
+            '2/3 15:30:00',
+            '2/3 15:35:00'
+        ];
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Average moisture (%)',
+                    backgroundColor: 'rgba(0,0,255,1)',
+                    data: [55, 45, 60, 70, 50, 58, 55, 60],
+                    borderColor: 'rgba(0,0,255,0.5)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointHoverBorderWidth: 10
+                }
+            ]
+        };
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Average Temperature from ... to...'
+                    }
+                },
+                scales: {
+                    y: {
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        };
+        const tempChar = new Chart(
+            document.getElementById('moistureChart'),
+            config
+        );
+    </script>
 </body>
 
 </html>
