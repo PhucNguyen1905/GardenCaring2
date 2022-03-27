@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
     <link rel="stylesheet" href="/css/style.css">
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Socket.io -->
+    <script src="socket.io/socket.io.js"></script>
+
+    <script>
+        // Connect to server
+        let socket = io('http://localhost:8080')
+        socket.on('Server-send-moist-data', data => {
+            $("#moistVal").text(data['value'] + '%')
+            $("#timeUpdate").text(data['time'])
+            $("#dateUpdate").text(data['date'])
+        })
+        $(document).ready(function () {
+
+        })
+    </script>
 </head>
 
 <body>
@@ -56,8 +73,12 @@
                         <div class="left">
                             <span class="material-icons-sharp">water_drop</span>
                             <h3>Current moisture</h3>
-                            <h1>60 %</h1>
-                            <small class="text-muted">1 Minutes ago</small>
+                            <h1 id="moistVal">
+                                <%= moistData[0] %>%
+                            </h1>
+                            <small class="text-muted">
+                                <%= moistData[1] %>
+                            </small>
                         </div>
                         <div class="">
                             <span class="material-icons-sharp">analytics</span>

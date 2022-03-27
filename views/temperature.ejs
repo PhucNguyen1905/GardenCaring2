@@ -10,6 +10,25 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Socket.io -->
+    <script src="socket.io/socket.io.js"></script>
+
+    <script>
+        // Connect to server
+        let socket = io('http://localhost:8080')
+        socket.on('Server-send-temp-data', data => {
+            console.log(data)
+            $("#tempVal").text(data['value'])
+            $("#timeUpdate").text(data['time'])
+            $("#dateUpdate").text(data['date'])
+        })
+        $(document).ready(function () {
+
+        })
+    </script>
 </head>
 
 <body>
@@ -56,8 +75,12 @@
                         <div class="left">
                             <span class="material-icons-sharp">thermostat</span>
                             <h3>Current temperature</h3>
-                            <h1>32 ℃</h1>
-                            <small class="text-muted">1 Minutes ago</small>
+                            <h1> <b id="tempVal">
+                                    <%= tempData[0] %>
+                                </b> &#8451;</h1>
+                            <small class="text-muted">
+                                <%= tempData[1] %>
+                            </small>
                         </div>
                         <div class="">
                             <span class="material-icons-sharp">analytics</span>
