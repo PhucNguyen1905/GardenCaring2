@@ -1,10 +1,14 @@
 const axios = require('axios');
+const deviceModel = require('../models/deviceModel');
 
 // Later we will get adaname through MySQL
 let AIO_USERNAME = "PhucBKU"
 
 const tempAPI = 'https://io.adafruit.com/api/v2/' + AIO_USERNAME + '/feeds/co3109-temp/data?limit=1';
 const moistAPI = 'https://io.adafruit.com/api/v2/' + AIO_USERNAME + '/feeds/co3109-moisture/data?limit=1';
+const lightAPI = 'https://io.adafruit.com/api/v2/' + AIO_USERNAME + '/feeds/co3109-light/data?limit=1';
+const pumpAPI = 'https://io.adafruit.com/api/v2/' + AIO_USERNAME + '/feeds/co3109-pump/data?limit=1';
+const domeAPI = 'https://io.adafruit.com/api/v2/' + AIO_USERNAME + '/feeds/co3109-dome/data?limit=1';
 
 
 // Format time to time and date
@@ -113,7 +117,55 @@ exports.viewMoist = (req, res) => {
 
 // View Control Device page
 exports.viewDevice = (req, res) => {
-    res.render('device');
+    (async () => {
+
+        try {
+            const lightData = await axios.get(lightAPI)
+                .then(function (res) {
+                    let value = parseInt(res.data[0].value)
+                    let time = foramtTime(res.data[0].created_at)
+                    let date = res.data[0].created_at.slice(0, 10)
+                    let data = []
+                    data.push(value)
+                    data.push(time)
+                    data.push(date)
+                    return data
+                })
+            const pumpData = await axios.get(pumpAPI)
+                .then(function (res) {
+                    let value = parseInt(res.data[0].value)
+                    let time = foramtTime(res.data[0].created_at)
+                    let date = res.data[0].created_at.slice(0, 10)
+                    let data = []
+                    data.push(value)
+                    data.push(time)
+                    data.push(date)
+                    return data
+                })
+
+            const domeData = await axios.get(domeAPI)
+                .then(function (res) {
+                    let value = parseInt(res.data[0].value)
+                    let time = foramtTime(res.data[0].created_at)
+                    let date = res.data[0].created_at.slice(0, 10)
+                    let data = []
+                    data.push(value)
+                    data.push(time)
+                    data.push(date)
+                    return data
+                })
+
+            res.render('device', {
+                lightData: lightData,
+                pumpData: pumpData,
+                domeData: domeData,
+                updateDevice: deviceModel.updateDevice
+            });
+        } catch (err) {
+            console.log("Error!", err);
+        }
+    })()
+
 }
 
 // View Set limit page

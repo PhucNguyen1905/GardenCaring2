@@ -105,8 +105,6 @@ INSERT INTO `sensor` (`SENSORID`, `UPLIMIT`, `LOWLIMIT`) VALUES
 --
 
 CREATE TABLE `update` (
-  `USERID` int(11) NOT NULL,
-  `ADAKEY` varchar(100) NOT NULL,
   `DEVICEID` int(11) NOT NULL,
   `TIMEUPDATE` timestamp NOT NULL DEFAULT current_timestamp(),
   `CHANGE` varchar(100) NOT NULL
@@ -125,15 +123,16 @@ CREATE TABLE `user` (
   `GMAIL` varchar(100) NOT NULL,
   `ADDRESS` varchar(500) NOT NULL,
   `FNAME` varchar(100) NOT NULL,
-  `LNAME` varchar(100) NOT NULL
+  `LNAME` varchar(100) NOT NULL,
+  `PHONE` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `ADAKEY`, `ADANAME`, `GMAIL`, `ADDRESS`, `FNAME`, `LNAME`) VALUES
-(1, 'aio_DDdA88zcsN2lN3b7sVZNqFLdjZeO', 'PhucBKU', 'user1@gmail.com', '268 Lý Thường Kiệt, Phường 14, Quận 10, Thành phố Hồ Chí Minh', 'Phuc', 'Nguyen');
+INSERT INTO `user` (`ID`, `ADAKEY`, `ADANAME`, `GMAIL`, `ADDRESS`, `FNAME`, `LNAME`,`PHONE`) VALUES
+(1, 'aio_DDdA88zcsN2lN3b7sVZNqFLdjZeO', 'PhucBKU', 'user1@gmail.com', '268 Lý Thường Kiệt, Phường 14, Quận 10, Thành phố Hồ Chí Minh', 'Phuc', 'Nguyen','0388542487');
 
 --
 -- Indexes for dumped tables
@@ -167,14 +166,13 @@ ALTER TABLE `sensor`
 -- Indexes for table `update`
 --
 ALTER TABLE `update`
-  ADD PRIMARY KEY (`USERID`,`ADAKEY`,`DEVICEID`,`TIMEUPDATE`),
-  ADD KEY `DEVICEID` (`DEVICEID`);
+  ADD PRIMARY KEY (`DEVICEID`,`TIMEUPDATE`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`ID`,`ADAKEY`);
+  ADD PRIMARY KEY (`ID`,`ADANAME`);
 
 --
 -- Constraints for dumped tables
@@ -202,7 +200,6 @@ ALTER TABLE `sensor`
 -- Constraints for table `update`
 --
 ALTER TABLE `update`
-  ADD CONSTRAINT `UPDATE_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `UPDATE_ibfk_2` FOREIGN KEY (`DEVICEID`) REFERENCES `device` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

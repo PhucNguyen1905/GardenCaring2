@@ -18,7 +18,7 @@
 
     <script>
         // Connect to server
-        // let socket = io('http://localhost:8080')
+        let socket = io('http://localhost:8080')
         // socket.on('Server-send-temp-data', data => {
 
         // })
@@ -26,9 +26,22 @@
 
         // })
 
-
         $(document).ready(function () {
-            $('#pumpCheck').prop('checked', true);
+            // if (lightData[0] == 1) {
+            //     $('#lightCheck').prop('checked', true);
+            // } else {
+            //     $('#lightCheck').prop('checked', false);
+            // }
+            // if (pumpData[0] == 5) {
+            //     $('#pumpCheck').prop('checked', true);
+            // } else {
+            //     $('#pumpCheck').prop('checked', false);
+            // }
+            // if (domeData[0] == 7) {
+            //     $('#domeCheck').prop('checked', true);
+            // } else {
+            //     $('#domeCheck').prop('checked', false);
+            // }
         })
     </script>
 </head>
@@ -81,7 +94,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input onclick="alert('clicked');" type="checkbox">
+                        <input id="lightCheck" type="checkbox" <%=lightData[0]==1? 'checked' :'' %> >
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -98,8 +111,7 @@
                             <th>Name</th>
                             <th>Location</th>
                             <th>Status</th>
-                            <th>Turn ON/OFF</th>
-                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -113,33 +125,10 @@
                             <td>Lamp 1</td>
                             <td>A1</td>
                             <td>On</td>
-                            <td><label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td class="primary">Details</td>
                         </tr>
-                        <tr>
-                            <td><label class="container-checkbox">
-                                    <input type="checkbox" checked="checked" name="lampIds[]">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td>
-                            <td>2</td>
-                            <td>Lamp 2</td>
-                            <td>A1</td>
-                            <td>On</td>
-                            <td><label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td class="primary">Details</td>
-                        </tr>
+
                     </tbody>
                 </table>
-                <a href="#">Show all</a>
             </div>
 
             <!-- List of Pumps -->
@@ -153,7 +142,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input type="checkbox" id="pumpCheck">
+                        <input type="checkbox" id="pumpCheck" <%=pumpData[0]==5? 'checked' :'' %>>
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -225,7 +214,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="domeCheck" <%=domeData[0]==7? 'checked' :'' %>>
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -374,6 +363,8 @@
         </div>
     </div>
     <script src="./index.js"></script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var lampCheckboxAll = $('#lamp-checkbox-all');
