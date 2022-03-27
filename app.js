@@ -1,0 +1,56 @@
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+require("dotenv").config();
+const app = express();
+
+// Config app
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Set public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Socket.io section
+
+// Router
+const userRoute = require('./routes/user');
+
+app.use('/', userRoute);
+app.get('/test', (req, res) => {
+    res.render('test')
+})
+
+let port = process.env.PORT || 8080;
+
+let server = app.listen(port, () => {
+    console.log("Running on port: " + port);
+    console.log("http://localhost:8080");
+});
+
+// Socket.io section
+const io = require('socket.io')(server);
+io.on('connection', client => {
+    console.log('New connection: ' + client.id);
+    client.on('Client-send-data', data => {
+        console.log(data)
+        io.sockets.emit('Server-send-data', data)
+    });
+
+    client.on('Gateway-send-temp', data => {
+        io.sockets.emit('Server-send-temp-data', data)
+    })
+    client.on('Gateway-send-moist', data => {
+        io.sockets.emit('Server-send-moist-data', data)
+    })
+
+    client.on('disconnect', () => {
+        console.log(client.id + ' disconnected!')
+    });
+});

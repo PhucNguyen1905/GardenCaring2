@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GardenCare | Device</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-device.css">
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Socket.io -->
+    <script src="socket.io/socket.io.js"></script>
+
+    <script>
+        // Connect to server
+        let socket = io('http://localhost:8080')
+        // socket.on('Server-send-temp-data', data => {
+
+        // })
+        // socket.on('Server-send-moist-data', data => {
+
+        // })
+
+        $(document).ready(function () {
+            // if (lightData[0] == 1) {
+            //     $('#lightCheck').prop('checked', true);
+            // } else {
+            //     $('#lightCheck').prop('checked', false);
+            // }
+            // if (pumpData[0] == 5) {
+            //     $('#pumpCheck').prop('checked', true);
+            // } else {
+            //     $('#pumpCheck').prop('checked', false);
+            // }
+            // if (domeData[0] == 7) {
+            //     $('#domeCheck').prop('checked', true);
+            // } else {
+            //     $('#domeCheck').prop('checked', false);
+            // }
+        })
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="">
+                    <h2>Garden<span class="primary">Care</span></h2>
+                </div>
+                <div class="close" id="close-btn"><span class="material-icons-sharp">close</span></div>
+            </div>
+            <div class="sidebar">
+                <a href="/"><span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="/temp"><span class="material-icons-sharp">thermostat</span>
+                    <h3>Temperature</h3>
+                </a>
+                <a href="/moist"><span class="material-icons-sharp">water_drop</span>
+                    <h3>Moisture</h3>
+                </a>
+                <a href="/limit"><span class="material-icons-sharp">insights</span>
+                    <h3>Set limitation</h3>
+                </a>
+                <a href="/device" class="active"><span class="material-icons-sharp">settings_suggest</span>
+                    <h3>Controll</h3>
+                </a>
+
+                <a href="/login"><span class="material-icons-sharp">logout</span>
+                    <h3>Log Out</h3>
+                </a>
+
+            </div>
+        </aside>
+
+        <!-- MAIN SECTION -->
+        <main>
+            <h1>Device</h1>
+            <!-- List of Lamps -->
+            <div class="list-devices">
+                <h2>List of Lamps</h2>
+                <div class="checkall-flex-container"">
+                    <label class=" container-checkbox">
+                    <input type="checkbox" checked="checked" id="lamp-checkbox-all">
+                    <span class="checkmark"></span>
+                    </label>
+                    <h3>Select All</h3>
+                    <h3>Turn ON/OFF: </h3>
+                    <label class="switch">
+                        <input id="lightCheck" type="checkbox" <%=lightData[0]==1? 'checked' :'' %> >
+                        <span class="slider round"></span>
+                    </label>
+                    <h3>Auto Mode: </h3>
+                    <label class="switch">
+                        <input type="checkbox" id="autoModeLight">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label class="container-checkbox">
+                                    <input type="checkbox" checked="checked" name="lampIds[]">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td>1</td>
+                            <td>Lamp 1</td>
+                            <td>A1</td>
+                            <td>On</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- List of Pumps -->
+            <div class="list-devices">
+                <h2>List of Pumps</h2>
+                <div class="checkall-flex-container"">
+                    <label class=" container-checkbox">
+                    <input type="checkbox" checked="checked" id="pump-checkbox-all">
+                    <span class="checkmark"></span>
+                    </label>
+                    <h3>Select All</h3>
+                    <h3>Turn ON/OFF: </h3>
+                    <label class="switch">
+                        <input type="checkbox" id="pumpCheck" <%=pumpData[0]==5? 'checked' :'' %>>
+                        <span class="slider round"></span>
+                    </label>
+                    <h3>Auto Mode: </h3>
+                    <label class="switch">
+                        <input type="checkbox" id="pumpCheckAutoMode">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Turn ON/OFF</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label class="container-checkbox">
+                                    <input type="checkbox" checked="checked" name="pumpIds[]">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td>1</td>
+                            <td>Pump 1</td>
+                            <td>A1</td>
+                            <td>On</td>
+                            <td><label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                            <td><label class="container-checkbox">
+                                    <input type="checkbox" checked="checked" name="pumpIds[]">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td>2</td>
+                            <td>Pump 2</td>
+                            <td>A1</td>
+                            <td>On</td>
+                            <td><label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="primary">Details</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#">Show all</a>
+            </div>
+
+            <!-- List of Domes -->
+            <div class="list-devices">
+                <h2>List of Domes</h2>
+                <div class="checkall-flex-container"">
+                    <label class=" container-checkbox">
+                    <input type="checkbox" checked="checked" id="dome-checkbox-all">
+                    <span class="checkmark"></span>
+                    </label>
+                    <h3>Select All</h3>
+                    <h3>Turn ON/OFF: </h3>
+                    <label class="switch">
+                        <input type="checkbox" id="domeCheck" <%=domeData[0]==7? 'checked' :'' %>>
+                        <span class="slider round"></span>
+                    </label>
+                    <h3>Auto Mode: </h3>
+                    <label class="switch">
+                        <input type="checkbox" id="domeAutoModeSwitch">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Turn ON/OFF</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label class="container-checkbox">
+                                    <input type="checkbox" checked="checked" name="domeIds[]">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td>1</td>
+                            <td>Dome 1</td>
+                            <td>A1</td>
+                            <td>On</td>
+                            <td><label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                            <td><label class="container-checkbox">
+                                    <input type="checkbox" checked="checked" name="domeIds[]">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </td>
+                            <td>2</td>
+                            <td>Dome 2</td>
+                            <td>A1</td>
+                            <td>On</td>
+                            <td><label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="primary">Details</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#">Show all</a>
+            </div>
+
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Phuc</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="/images/profile-1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="/images/profile-2.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Light System</b> was turned on</p>
+                            <small class="text-muted">Light System</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="/images/profile-2.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Dome System</b> was closed</p>
+                            <small class="text-muted">Dome System</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="/images/profile-2.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Pump System</b> was turned off</p>
+                            <small class="text-muted">Pump System</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="weather-analytics">
+                <h2>Analytics</h2>
+                <div class="item online">
+                    <div class="icon">
+                        <span class="material-icons-sharp">thermostat</span>
+                    </div>
+                    <div class="right">
+                        <div class="ingo">
+                            <h3>Average Tempera</h3>
+                            <small class="text-muted">Last 10 Hours</small>
+                        </div>
+                        <h5 class="success">Safe</h5>
+                        <h3>33 &#8451;</h3>
+                    </div>
+                </div>
+                <div class="item offline">
+                    <div class="icon">
+                        <span class="material-icons-sharp">water_drop</span>
+                    </div>
+                    <div class="right">
+                        <div class="ingo">
+                            <h3>Average Moisture</h3>
+                            <small class="text-muted">Last 10 Hours</small>
+                        </div>
+                        <h5 class="danger">Low</h5>
+                        <h3>55%</h3>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="/js/index.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var lampCheckboxAll = $('#lamp-checkbox-all');
+            var lampItemCheckbox = $('input[name="lampIds[]"]');
+            // Lamp Checkbox all changed
+            lampCheckboxAll.change(function () {
+                var isCheckedAll = $(this).prop('checked');
+                lampItemCheckbox.prop('checked', isCheckedAll);
+            });
+            // Lamp item checkbox changed
+            lampItemCheckbox.change(function () {
+                var isCheckedAll = lampItemCheckbox.length === $('input[name="lampIds[]"]:checked').length;
+                lampCheckboxAll.prop('checked', isCheckedAll);
+            })
+
+            var pumpCheckboxAll = $('#pump-checkbox-all');
+            var pumpItemCheckbox = $('input[name="pumpIds[]"]');
+            // Pump Checkbox all changed
+            pumpCheckboxAll.change(function () {
+                var isCheckedAll = $(this).prop('checked');
+                pumpItemCheckbox.prop('checked', isCheckedAll);
+            });
+            // Pump item checkbox changed
+            pumpItemCheckbox.change(function () {
+                var isCheckedAll = pumpItemCheckbox.length === $('input[name="pumpIds[]"]:checked').length;
+                pumpCheckboxAll.prop('checked', isCheckedAll);
+            })
+
+            var domeCheckboxAll = $('#dome-checkbox-all');
+            var domeItemCheckbox = $('input[name="domeIds[]"]');
+            // Dome Checkbox all changed
+            domeCheckboxAll.change(function () {
+                var isCheckedAll = $(this).prop('checked');
+                domeItemCheckbox.prop('checked', isCheckedAll);
+            });
+            // Dome item checkbox changed
+            domeItemCheckbox.change(function () {
+                var isCheckedAll = domeItemCheckbox.length === $('input[name="domeIds[]"]:checked').length;
+                domeCheckboxAll.prop('checked', isCheckedAll);
+            })
+        });
+
+
+        // bat dauscript cua truong
+
+        const lightCheckTR = document.getElementById("lightCheck");
+        lightCheckTR.addEventListener("change", onLightChanged);
+        const httpTR = new XMLHttpRequest();
+        httpTR.onload = function(){
+            console.log(this.responseText);
+        }
+        function onLightChanged(){
+            const url = "/updateAll";
+            const change = lightCheckTR.checked ? "Light On" : "Light Off";
+            const data = "DEVICETYPE=Light&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+
+        //--------------------------
+        const lightCheckAutoModeTR = document.getElementById("autoModeLight");
+        lightCheckAutoModeTR.addEventListener("change", onLightAutoModeChanged);
+        function onLightAutoModeChanged(){
+            const url = "/updateAll";
+            const change = lightCheckAutoModeTR.checked ? "Light Auto Mode On" : "Light Auto Mode Off";
+            const data = "DEVICETYPE=Light&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //------------------------------
+        const pumpCheckTR = document.getElementById("pumpCheck");
+        pumpCheckTR.addEventListener("change", onPumpChange);
+        function onPumpChange(){
+            const url = "/updateAll";
+            const change = pumpCheckTR.checked ? "Pump On" : "Pump Off";
+            const data = "DEVICETYPE=Pump&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //-----------------------------
+        const pumpCheckAutoModeTR = document.getElementById("pumpCheckAutoMode");
+        pumpCheckAutoModeTR.addEventListener("change", onPumpAutoModeChange);
+        function onPumpAutoModeChange(){
+            const url = "/updateAll";
+            const change = pumpCheckAutoModeTR.checked ? "Pump Auto Mode On" : "Pump Auto Mode Off";
+            const data = "DEVICETYPE=Pump&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //
+        const domeCheckTR = document.getElementById("domeCheck");
+        domeCheckTR.addEventListener("change", onDomeChange);
+        function onDomeChange() {
+            const url = "/updateAll";
+            const change = domeCheckTR.checked ? "Dome On" : "Dome Off";
+            const data = "DEVICETYPE=Dome&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //0-------------------------
+        const domeCheckAutoTR = document.getElementById("domeAutoModeSwitch");
+        domeCheckAutoTR.addEventListener("change", onDomeChangeAutoMode);
+        function onDomeChangeAutoMode(){
+            const url = "/updateAll";
+            const change = domeCheckAutoTR.checked ? "Dome Auto Mode On" : "Dome Auto Mode Off";
+            const data = "DEVICETYPE=Dome&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //ket thuc scrypt cua truong
+    </script>
+</body>
+
+</html>
