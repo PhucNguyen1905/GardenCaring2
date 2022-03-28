@@ -15,3 +15,21 @@ exports.updateDevice = (table, id, field, content) => {
         if (err) throw err;
     })
 }
+
+exports.updateChange = (deviceId, change) => {
+    let sql = "INSERT INTO `update` (`DEVICEID`, `CHANGE`) VALUES (?, ?)";
+    connection.query(sql, [Number(deviceId), String(change)], (err, data) => {
+        if (err) throw err;
+    })
+}
+
+exports.getDeviceByType = (deviceType) => {
+    const promise = new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM device WHERE TYPE = ?";
+        connection.query(sql, String(deviceType), (err, data) => {
+            if (err) reject(err);
+            else resolve(data);
+        })
+    })
+    return promise;
+}

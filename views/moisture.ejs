@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/moisture.css">
     <!-- Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Socket.io -->
@@ -64,62 +65,82 @@
         </aside>
 
         <!-- MAIN SECTION -->
+
         <main>
             <h1>Moisture</h1>
             <div class="insights">
                 <!-- box SECTION -->
-                <div class="box bigbox">
-                    <div class="middle">
-                        <div class="left">
+                <div class="div">
+                    <div class="div1">
+                        <div>
                             <span class="material-icons-sharp">water_drop</span>
-                            <h3>Current moisture</h3>
-                            <h1 id="moistVal">
-                                <%= moistData[0] %>%
-                            </h1>
-                            <small class="text-muted">
-                                <%= moistData[1] %>
-                            </small>
                         </div>
-                        <div class="">
-                            <span class="material-icons-sharp">analytics</span>
-                            <h3>Average moisture</h3>
-                            <h1>50 %</h1>
-                            <select name="avg-time" id="">
-                                <option value="1">1 hour ago</option>
-                                <option value="2">6 hours ago</option>
-                                <option value="3">12 hours ago</option>
-                                <option value="4">24 hours ago</option>
-                            </select>
-                        </div>
+                        <h2>Current <br> Moisture</h2>
                     </div>
-
+                    <div class="div2">
+                        <p id="moistVal">
+                            <%= moistData[0] %>%
+                        </p>
+                        <small class="text-muted" id="timeUpdate">
+                            <%= moistData[1] %>
+                        </small>
+                    </div>
                 </div>
-                <div class="box bigbox">
+                <div class="div">
+                    <div class="div1">
+                        <div>
+                            <span class="material-icons-sharp">analytics</span>
+                        </div>
+                        <h2>Average Moisture</h2>
+                    </div>
+                    <div class="div2">
+                        <p>32 ℃</p>
+                        <span class="material-icons-sharp">expand_more</span>
+                        <select name="avg-time" id="select">
+                            <option value="1">1 hour ago</option>
+                            <option value="2">6 hours ago</option>
+                            <option value="3">12 hours ago</option>
+                            <option value="4">24 hours ago</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bigbox">
                     <div class="middle">
                         <span class="material-icons-sharp">analytics</span>
                         <h1>Moisture Analytics</h1>
                     </div>
-                    <br>
-                    <div class="date-container">
-                        <p class="date">From:</p>
-                        <input class="date" type="datetime-local">
+                    <div class="dive">
+                        <div class="dive1">
+                            <p>From:</p>
+                            <input type="datetime-local">
+                        </div>
+
+                        <div class="dive1">
+                            <p>To:</p>
+                            <input type="datetime-local">
+                        </div>
                     </div>
-                    <div class="date-container">
-                        <p class="date">To:</p>
-                        <input class="date" type="datetime-local">
-                    </div>
-                    <div class="date-container">
-                        <div class="middle">
-                            <p class="date">Step:</p>
-                            <input type="number" id="inputStep" class="date">
-                            <select name="Time-unit" id="" class="date">
+
+                    <div class="divo">
+                        <div class="divo1">
+                            <p>Step:</p>
+                            <input type="number">
+                        </div>
+                        <div class="divo1">
+                            <p>Unit:</p>
+                            <span class="material-icons-sharp">expand_more</span>
+                            <select name="Time-unit">
                                 <option value="minute">Minute</option>
                                 <option value="hour">Hour</option>
                                 <option value="day">Day</option>
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn">Analize</button>
+
+                    <div class="ana">
+                        <a href="" class="btn">Analize</a>
+                    </div>
 
                     <div class="chart">
                         <canvas id="moistureChart"></canvas>
@@ -214,7 +235,7 @@
 
         </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="/js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const labels = [
@@ -248,7 +269,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Average Temperature from ... to...'
+                        text: 'Average Moisture from ... to...'
                     }
                 },
                 scales: {

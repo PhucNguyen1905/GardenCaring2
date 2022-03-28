@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Poppins:wght@300;400;500;600;700;800&family=Raleway&family=Rubik&display=swap');
+
+/* ROOT VARAIBLES    */
+:root { 
+    --color-primary: #7380ec; 
+    --color-danger: #ff7782; 
+    --col-success: #41f1b6; 
+    --color-warning: #ffbb55; 
+    --color-white: #fff; 
+    --color-info-dark: #7d8da1; 
+    --color-info-light: #dce1eb; 
+    --color-dark: #363949; 
+    --color-light: rgba(132, 139, 200, 0.18); 
+    --color-primary-variant: #111e88; 
+    --color-dark-variant: #677483; 
+    --color-background: #f6f6f9; 
+    --card-border-radius: 2rem; 
+    --border-radius-1: 0.4rem; 
+    --border-radius-2: 0.8rem; 
+    --border-radius-3: 1.2rem; 
+    --card-padding: 1.8rem; 
+    --padding-1: 1.2rem; 
+    --box-shadow: 0 2rem 3rem var(--color-light); 
+}
+
+
+
+/* DARK THEME VARAIBLES  */
+  .dark-theme-variables { 
+    --color-background: #181a1e; 
+    --color-white: #202528; 
+    --color-dark: #edeffd; 
+    --color-dark-variant: #a3bdcc; 
+    --color-light: rgba(0, 0, 0, 0.4); --box-shadow: 0 2rem 3rem var(--color-light); 
+    --color-info-light: #7d8da1;
+}
+
+/* ================= CSS cua Truong ============= */
+main .insights .bigbox{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+main .insights .bigbox .middle{
+    margin-bottom: 20px;
+}
+
+main .insights .bigbox:first-child .middle span{
+    background: var(--color-danger);
+}
+
+main .insights .bigbox .middle span{
+    background: var(--color-primary);
+}
+
+main .bigdiv{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+main .insights .bigbox .bigdiv > div{
+    width: 100%;
+    padding: 30px;
+    background: var(--color-background);
+    /* background: var(--color-primary); */
+    border-radius: 20px;
+    border: 1px solid var(--color-info-dark);
+}
+
+main .insights .bigbox .bigdiv .div1 input{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    text-align: center;
+    font-size: 60px;
+    border-radius: 20px;
+    color: var(--color-dark);
+    background: var(--color-white);
+}
+
+main .insights .bigbox .bigdiv .div1 .btn{
+    display: block;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 700;
+    background: var(--color-primary);
+}
+
+
+main .recent-changes {
+    margin-top: 2rem;
+}
+
+main .recent-changes h2{
+    margin-bottom: 0.8rem;
+}
+
+main .recent-changes table{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .recent-changes table:hover{
+    box-shadow: none;
+}
+
+main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+main table tbody tr:last-child td{
+    border: none;
+}
+
+main .recent-changes a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary); 
+}
+
+@media (max-width:495px) {
+    main .bigdiv{
+        flex-direction: column;
+    }
+}
+
+@media (max-width:761px) {
+    main .bigdiv{
+        display: flex;
+    }
+} 
+ 
+@media (max-width:1001px) {
+    main .bigdiv{
+        grid-template-columns: 1fr;
+    }
+}

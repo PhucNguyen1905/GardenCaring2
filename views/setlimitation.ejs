@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/limitation.css">
 </head>
 
 <body>
@@ -51,48 +52,38 @@
             <h1>Set limitation</h1>
             <div class="insights">
                 <!-- box SECTION -->
-                <div class="box bigbox">
+                <div class="bigbox">
                     <div class="middle">
                         <span class="material-icons-sharp">thermostat</span>
                         <h1>Temperature limitation</h1>
                     </div>
-                    <h3>Upper limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" id="inputStep" class="date"
-                                placeholder="Input tempareture"><strong>℃</strong>
+                    <div class="bigdiv">
+                        <div class="div1">
+                            <input type="text" placeholder="℃">
+                            <a href="" class="btn">CHANGE UPPER LIMIT</a>
                         </div>
-                        <button class="btn">Save changes</button>
-                    </div>
-                    <h3>Lower limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" id="inputStep" class="date"
-                                placeholder="Input tempareture"><strong>℃</strong>
+                        <div class="div1">
+                            <input type="text" placeholder="℃">
+                            <a href="" class="btn">CHANGE LOWER LIMIT</a>
                         </div>
-                        <button class="btn">Save changes</button>
                     </div>
+
                 </div>
                 <div class="box bigbox">
                     <div class="middle">
                         <span class="material-icons-sharp">water_drop</span>
                         <h1>Moisture limitation</h1>
                     </div>
-                    <h3>Upper limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" placeholder="Input tempareture"><strong>℃</strong>
+                    <div class="bigdiv">
+                        <div class="div1">
+                            <input type="text" placeholder="%">
+                            <a href="" class="btn">CHANGE UPPER LIMIT</a>
                         </div>
-                        <button class="btn">Save changes</button>
-                    </div>
-                    <h3>Lower limitation:</h3>
-                    <div class="middle">
-                        <div>
-                            <input type="text" placeholder="Input tempareture"><strong>℃</strong>
+                        <div class="div1">
+                            <input type="text" placeholder="%">
+                            <a href="" class="btn">CHANGE LOWER LIMIT</a>
                         </div>
-                        <button class="btn">Save changes</button>
                     </div>
-
                 </div>
             </div>
 
@@ -210,7 +201,7 @@
 
         </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="/js/index.js"></script>
 
 </body>
 

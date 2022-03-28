@@ -99,7 +99,7 @@
                     </label>
                     <h3>Auto Mode: </h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="autoModeLight">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -147,7 +147,7 @@
                     </label>
                     <h3>Auto Mode: </h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="pumpCheckAutoMode">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -219,7 +219,7 @@
                     </label>
                     <h3>Auto Mode: </h3>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="domeAutoModeSwitch">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -362,7 +362,7 @@
 
         </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="/js/index.js"></script>
 
 
     <script>
@@ -407,6 +407,80 @@
             })
         });
 
+
+        // bat dauscript cua truong
+
+        const lightCheckTR = document.getElementById("lightCheck");
+        lightCheckTR.addEventListener("change", onLightChanged);
+        const httpTR = new XMLHttpRequest();
+        httpTR.onload = function () {
+            console.log(this.responseText);
+        }
+        function onLightChanged() {
+            const url = "/updateAll";
+            const change = lightCheckTR.checked ? "Light On" : "Light Off";
+            const data = "DEVICETYPE=Light&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+
+        //--------------------------
+        const lightCheckAutoModeTR = document.getElementById("autoModeLight");
+        lightCheckAutoModeTR.addEventListener("change", onLightAutoModeChanged);
+        function onLightAutoModeChanged() {
+            const url = "/updateAll";
+            const change = lightCheckAutoModeTR.checked ? "Light Auto Mode On" : "Light Auto Mode Off";
+            const data = "DEVICETYPE=Light&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //------------------------------
+        const pumpCheckTR = document.getElementById("pumpCheck");
+        pumpCheckTR.addEventListener("change", onPumpChange);
+        function onPumpChange() {
+            const url = "/updateAll";
+            const change = pumpCheckTR.checked ? "Pump On" : "Pump Off";
+            const data = "DEVICETYPE=Pump&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //-----------------------------
+        const pumpCheckAutoModeTR = document.getElementById("pumpCheckAutoMode");
+        pumpCheckAutoModeTR.addEventListener("change", onPumpAutoModeChange);
+        function onPumpAutoModeChange() {
+            const url = "/updateAll";
+            const change = pumpCheckAutoModeTR.checked ? "Pump Auto Mode On" : "Pump Auto Mode Off";
+            const data = "DEVICETYPE=Pump&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //
+        const domeCheckTR = document.getElementById("domeCheck");
+        domeCheckTR.addEventListener("change", onDomeChange);
+        function onDomeChange() {
+            const url = "/updateAll";
+            const change = domeCheckTR.checked ? "Dome On" : "Dome Off";
+            const data = "DEVICETYPE=Dome&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //0-------------------------
+        const domeCheckAutoTR = document.getElementById("domeAutoModeSwitch");
+        domeCheckAutoTR.addEventListener("change", onDomeChangeAutoMode);
+        function onDomeChangeAutoMode() {
+            const url = "/updateAll";
+            const change = domeCheckAutoTR.checked ? "Dome Auto Mode On" : "Dome Auto Mode Off";
+            const data = "DEVICETYPE=Dome&CHANGE=" + change;
+            httpTR.open("POST", url);
+            httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpTR.send(data);
+        }
+        //ket thuc scrypt cua truong
     </script>
 </body>
 
