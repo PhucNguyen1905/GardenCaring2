@@ -38,11 +38,19 @@ let server = app.listen(port, () => {
 const io = require('socket.io')(server);
 io.on('connection', client => {
     console.log('New connection: ' + client.id);
-    client.on('Client-send-data', data => {
-        console.log(data)
-        io.sockets.emit('Server-send-data', data)
+
+    // Get request from client and send to gateway
+    client.on('Client-control-light', data => {
+        io.sockets.emit('Server-control-light', data)
+    });
+    client.on('Client-control-pump', data => {
+        io.sockets.emit('Server-control-pump', data)
+    });
+    client.on('Client-control-dome', data => {
+        io.sockets.emit('Server-control-dome', data)
     });
 
+    // Get new data from gateway and update in page
     client.on('Gateway-send-temp', data => {
         io.sockets.emit('Server-send-temp-data', data)
     })

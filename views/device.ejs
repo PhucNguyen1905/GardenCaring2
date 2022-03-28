@@ -214,7 +214,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input type="checkbox" id="domeCheck" <%=domeData[0]==7? 'checked' :'' %>>
+                        <input type="checkbox" id="domeCheck" <%=domeData[0]==3? 'checked' :'' %>>
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -420,6 +420,11 @@
             const url = "/updateAll";
             const change = lightCheckTR.checked ? "Light On" : "Light Off";
             const data = "DEVICETYPE=Light&CHANGE=" + change;
+            if (change == 'Light On') {
+                socket.emit('Client-control-light', 1)
+            } else {
+                socket.emit('Client-control-light', 0)
+            }
             httpTR.open("POST", url);
             httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             httpTR.send(data);
@@ -442,6 +447,11 @@
         function onPumpChange() {
             const url = "/updateAll";
             const change = pumpCheckTR.checked ? "Pump On" : "Pump Off";
+            if (change == 'Pump On') {
+                socket.emit('Client-control-pump', 5)
+            } else {
+                socket.emit('Client-control-pump', 4)
+            }
             const data = "DEVICETYPE=Pump&CHANGE=" + change;
             httpTR.open("POST", url);
             httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -464,6 +474,11 @@
         function onDomeChange() {
             const url = "/updateAll";
             const change = domeCheckTR.checked ? "Dome On" : "Dome Off";
+            if (change == 'Dome On') {
+                socket.emit('Client-control-dome', 3)
+            } else {
+                socket.emit('Client-control-dome', 2)
+            }
             const data = "DEVICETYPE=Dome&CHANGE=" + change;
             httpTR.open("POST", url);
             httpTR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
