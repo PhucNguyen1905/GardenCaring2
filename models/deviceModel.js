@@ -9,13 +9,6 @@ const connection = mysql.createPool({
     database: process.env.DB_NAME
 });
 
-exports.updateDevice = (table, id, field, content) => {
-    let sql = 'UPDATE ' + table + ' SET ' + field + ' = "' + content + '" WHERE id = ?';
-    connection.query(sql, [id], (err, results) => {
-        if (err) throw err;
-    })
-}
-
 exports.updateChange = (deviceId, change) => {
     let sql = "INSERT INTO `update` (`DEVICEID`, `CHANGE`) VALUES (?, ?)";
     connection.query(sql, [Number(deviceId), String(change)], (err, data) => {
