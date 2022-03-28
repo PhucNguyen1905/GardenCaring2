@@ -59,12 +59,16 @@
                     </div>
                     <div class="bigdiv">
                         <div class="div1">
-                            <input type="text" placeholder="℃">
-                            <a href="" class="btn">CHANGE UPPER LIMIT</a>
+                            <form method="POST" action="/limit/uptemp">
+                                <input type="text" name="upTemp" placeholder="℃">
+                                <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
+                            </form>
                         </div>
                         <div class="div1">
-                            <input type="text" placeholder="℃">
-                            <a href="" class="btn">CHANGE LOWER LIMIT</a>
+                            <form method="POST" action="/limit/lowtemp">
+                                <input type="text" name="lowTemp" placeholder="℃">
+                                <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
+                            </form>
                         </div>
                     </div>
 
@@ -76,12 +80,16 @@
                     </div>
                     <div class="bigdiv">
                         <div class="div1">
-                            <input type="text" placeholder="%">
-                            <a href="" class="btn">CHANGE UPPER LIMIT</a>
+                            <form method="POST" action="/limit/upmoist">
+                                <input type="text" name="upMoist" placeholder="%">
+                                <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
+                            </form>
                         </div>
                         <div class="div1">
-                            <input type="text" placeholder="%">
-                            <a href="" class="btn">CHANGE LOWER LIMIT</a>
+                            <form method="POST" action="/limit/lowmoist">
+                                <input type="text" name="lowMoist" placeholder="%">
+                                <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -96,23 +104,36 @@
                             <th>Data</th>
                             <th>Edge</th>
                             <th>Value</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Temperature</td>
-                            <td>Upper limitation</td>
-
-                            <td>32℃</td>
-                        </tr>
-                        <tr>
-                            <td>Moisture</td>
-                            <td>Upper limitation</td>
-                            <td>80%</td>
-                        </tr>
+                        <% for( let index = 0; index < rows.length; index++ ) { %>
+                            <tr>
+                                <% if (rows[index].TYPE == "uptemp") { %>
+                                    <td>Temperature</td>
+                                    <td>Upper limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>℃</td>
+                                <% } else if (rows[index].TYPE == "lowtemp") { %>
+                                    <td>Temperature</td>
+                                    <td>Lower limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>℃</td>
+                                <% } else if (rows[index].TYPE == "upmoist") { %>
+                                    <td>Moisture</td>
+                                    <td>Upper limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>%</td>
+                                <% } else if (rows[index].TYPE == "lowmoist") { %>
+                                    <td>Moisture</td>
+                                    <td>Lower limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>%</td>
+                                <% } %> 
+                                <td><%= rows[index].TIMEUPDATE %></td>
+                            </tr>
+                        <% } %>
+                        
                     </tbody>
                 </table>
-                <a href="#">Show all</a>
+                <!-- <a href="#">Show all</a> -->
             </div>
         </main>
 

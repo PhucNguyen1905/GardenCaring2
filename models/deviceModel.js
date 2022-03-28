@@ -26,3 +26,47 @@ exports.getDeviceByType = (deviceType) => {
     })
     return promise;
 }
+
+exports.submitLimit = (req, res) => {
+    var sensor = 'Tempsen'
+    var edge = 'UPLIMIT'
+    var value = 0
+    if (req.params.type == "uptemp") {
+        value = req.body.upTemp
+    } else if (req.params.type == "lowtemp") {
+        value = req.body.lowTemp
+        edge = 'LOWLIMIT'
+    } else if (req.params.type == "upmoist") {
+        value = req.body.upMoist
+        sensor = 'Moistsen'
+    } else if (req.params.type == "lowmoist") {
+        value = req.body.lowMoist
+        sensor = 'Moistsen'
+        edge = 'LOWLIMIT'
+    }
+    let selectIDSql = 'SELECT ID FROM DEVICE, SENSOR WHERE ID = SENSORID AND TYPE = \'' + sensor + '\''
+    let insertChangelimitSql = 'INSERT INTO changelimit(DEVICEID,type,newvalue) values (?, \'' + req.params.type + '\',?)'
+    let updateSensorSql = 'UPDATE SENSOR SET ' + edge + ' = ? WHERE SENSORID = ?'
+    
+    connection.query(selectIDSql, (err, ids) => {
+        if (!err) {
+            connection.query(insertChangelimitSql,[ids[0].ID, value], (err, rows) => {
+                if (err) { console.log(err); }
+            });
+            connection.query(updateSensorSql,[value, ids[0].ID], (err, rows) => {
+                if (err) { console.log(err); }
+            });
+        } else { console.log(err); }
+    });
+}
+
+exports.viewLimit = (req, res) => {
+    let selectChangelimitSql = 'SELECT * FROM `changelimit` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
+    connection.query(selectChangelimitSql, (err, rows) => {
+        if (!err) {
+            res.render('setlimitation', {
+                rows: rows
+            });
+        } else { console.log(err); }
+    });
+}

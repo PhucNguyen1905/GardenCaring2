@@ -14,6 +14,7 @@ route.get('/moist', userController.viewMoist);
 // Device and limit view
 route.get('/device', userController.viewDevice);
 route.get('/limit', userController.viewLimit);
+route.post('/limit/:type', userController.submitLimit);
 
 
 // Login and Register

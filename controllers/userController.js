@@ -170,6 +170,11 @@ exports.viewDevice = (req, res) => {
 
 // View Set limit page
 exports.viewLimit = (req, res) => {
-    res.render('setlimitation');
+    deviceModel.viewLimit(req,res)
+}
+
+exports.submitLimit = (req, res) => {
+    deviceModel.submitLimit(req, res)
+    deviceModel.viewLimit(req,res)
 }
 
