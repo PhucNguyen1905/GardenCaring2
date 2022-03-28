@@ -60,12 +60,24 @@ exports.submitLimit = (req, res) => {
     });
 }
 
+function convertTime(timeStr) {
+    var date = new Date(timeStr);
+    date = date.getUTCFullYear() + '-' +
+        ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
+        ('00' + date.getUTCDate()).slice(-2) + ' ' + 
+        ('00' + (date.getUTCHours()+7)).slice(-2) + ':' + 
+        ('00' + date.getUTCMinutes()).slice(-2) + ':' +
+        ('00' + date.getUTCSeconds()).slice(-2);
+    return(date);
+}
+
 exports.viewLimit = (req, res) => {
     let selectChangelimitSql = 'SELECT * FROM `changelimit` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
     connection.query(selectChangelimitSql, (err, rows) => {
         if (!err) {
             res.render('setlimitation', {
-                rows: rows
+                rows: rows,
+                convertTime
             });
         } else { console.log(err); }
     });
