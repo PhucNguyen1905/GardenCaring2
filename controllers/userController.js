@@ -158,8 +158,7 @@ exports.viewDevice = (req, res) => {
             res.render('device', {
                 lightData: lightData,
                 pumpData: pumpData,
-                domeData: domeData,
-                updateDevice: deviceModel.updateDevice
+                domeData: domeData
             });
         } catch (err) {
             console.log("Error!", err);
