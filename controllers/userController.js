@@ -60,7 +60,7 @@ exports.viewIndex = (req, res) => {
                 })
             const moistData = await axios.get(moistAPI)
                 .then(function (res) {
-                    let value = parseInt(res.data[0].value)
+                    let value = (parseInt(res.data[0].value) / 1023 * 100).toFixed(1);
                     let time = foramtTime(res.data[0].created_at)
                     let date = res.data[0].created_at.slice(0, 10)
                     let data = []
@@ -137,15 +137,17 @@ exports.viewIndex = (req, res) => {
                     return data;
                 })
 
-            const avgMoiseData = await axios.get(domeAPI)
+            const avgMoiseData = await axios.get(moistAPI)
                 .then(function (res) {
                     let data = 0;
                     for (let index = 0; index < res.data.length; index++) {
                         const datares = res.data[index];
-                        data = data + datares.value;
+                        data = data + Number(datares.value);
                     }
                     data = (data) / res.data.length;
+                    data = data / 1023 * 100;
                     data = Number(data.toFixed(1));
+
                     return data;
                 })
 

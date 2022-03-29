@@ -26,7 +26,7 @@
             $("#dateUpdate").text(data['date'])
         })
         socket.on('Server-send-moist-data', data => {
-            $("#moistVal").text(data['value'] + '%')
+            $("#moistVal").text((Number(data['value']) / 1023 * 100).toFixed(1) + '%')
             $("#timeUpdate").text(data['time'])
             $("#dateUpdate").text(data['date'])
         })
@@ -271,9 +271,9 @@
                             <h3>Average Tempera</h3>
                             <small class="text-muted">Last 20 updates</small>
                         </div>
-                        <% if (avgTemp>= 25 && avgTemp <= 30) { %>
+                        <% if (avgTemp>= 25 && avgTemp <= 35) { %>
                                 <h5 class="success">Safe</h5>
-                                <% } else if(avgTemp>= 20 && avgTemp <= 35) { %>
+                                <% } else if(avgTemp>= 20 && avgTemp <= 40) { %>
                                         <h5 class="warning">Risky</h5>
                                         <% } else {%>
                                             <h5 class="danger">Danger</h5>
@@ -295,7 +295,7 @@
                         <% if (avgMoise>= 60 && avgTemp <= 70) { %>
                                 <h5 class="success">Safe</h5>
                                 <% } else if(avgMoise>= 50 && avgMoise <= 80) { %>
-                                        <h5 class="warning">Uncomfortable</h5>
+                                        <h5 class="warning">Risky</h5>
                                         <% } else {%>
                                             <h5 class="danger">Danger</h5>
                                             <% } %>
