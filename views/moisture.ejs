@@ -70,82 +70,48 @@
             <h1>Moisture</h1>
             <div class="insights">
                 <!-- box SECTION -->
-                <div class="div">
-                    <div class="div1">
-                        <div>
-                            <span class="material-icons-sharp">water_drop</span>
-                        </div>
-                        <h2>Current <br> Moisture</h2>
-                    </div>
-                    <div class="div2">
-                        <p id="moistVal">
-                            <%= moistData[0] %>%
-                        </p>
-                        <small class="text-muted" id="timeUpdate">
-                            <%= moistData[1] %>
-                        </small>
-                    </div>
-                </div>
-                <div class="div">
-                    <div class="div1">
-                        <div>
-                            <span class="material-icons-sharp">analytics</span>
-                        </div>
-                        <h2>Average Moisture</h2>
-                    </div>
-                    <div class="div2">
-                        <p>32 ℃</p>
-                        <span class="material-icons-sharp">expand_more</span>
-                        <select name="avg-time" id="select">
-                            <option value="1">1 hour ago</option>
-                            <option value="2">6 hours ago</option>
-                            <option value="3">12 hours ago</option>
-                            <option value="4">24 hours ago</option>
-                        </select>
-                    </div>
-                </div>
+
 
                 <div class="bigbox">
                     <div class="middle">
                         <span class="material-icons-sharp">analytics</span>
                         <h1>Moisture Analytics</h1>
                     </div>
+
+                    <div class="chart">
+                        <canvas id="moistureChart"></canvas>
+                    </div>
                     <div class="dive">
                         <div class="dive1">
                             <p>From:</p>
-                            <input type="datetime-local">
+                            <input id="from" type="datetime-local">
                         </div>
 
                         <div class="dive1">
                             <p>To:</p>
-                            <input type="datetime-local">
+                            <input id="to" type="datetime-local">
                         </div>
                     </div>
 
                     <div class="divo">
                         <div class="divo1">
                             <p>Step:</p>
-                            <input type="number">
+                            <input id="step" type="number">
                         </div>
                         <div class="divo1">
                             <p>Unit:</p>
                             <span class="material-icons-sharp">expand_more</span>
-                            <select name="Time-unit">
-                                <option value="minute">Minute</option>
-                                <option value="hour">Hour</option>
-                                <option value="day">Day</option>
+                            <select name="Time-unit" id="unit">
+                                <option value="60000">Minute</option>
+                                <option value="3600000">Hour</option>
+                                <option value="86400000">Day</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="ana">
-                        <a href="" class="btn">Analize</a>
+                        <button id="ana">Analize</button>
                     </div>
-
-                    <div class="chart">
-                        <canvas id="moistureChart"></canvas>
-                    </div>
-
                 </div>
             </div>
         </main>
@@ -169,68 +135,42 @@
                     </div>
                 </div>
             </div>
-            <div class="recent-updates">
-                <h2>Recent Updates</h2>
-                <div class="updates">
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="/images/profile-2.jpg" alt="">
-                        </div>
-                        <div class="message">
-                            <p><b>Light System</b> was turned on</p>
-                            <small class="text-muted">Light System</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="/images/profile-2.jpg" alt="">
-                        </div>
-                        <div class="message">
-                            <p><b>Dome System</b> was closed</p>
-                            <small class="text-muted">Dome System</small>
-                        </div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo">
-                            <img src="/images/profile-2.jpg" alt="">
-                        </div>
-                        <div class="message">
-                            <p><b>Pump System</b> was turned off</p>
-                            <small class="text-muted">Pump System</small>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="weather-analytics">
-                <h2>Analytics</h2>
-                <div class="item online">
-                    <div class="icon">
-                        <span class="material-icons-sharp">thermostat</span>
-                    </div>
-                    <div class="right">
-                        <div class="ingo">
-                            <h3>Average Tempera</h3>
-                            <small class="text-muted">Last 10 Hours</small>
-                        </div>
-                        <h5 class="success">Safe</h5>
-                        <h3>33 &#8451;</h3>
-                    </div>
-                </div>
-                <div class="item offline">
-                    <div class="icon">
+            <div class="div">
+                <div class="div1">
+                    <div>
                         <span class="material-icons-sharp">water_drop</span>
                     </div>
-                    <div class="right">
-                        <div class="ingo">
-                            <h3>Average Moisture</h3>
-                            <small class="text-muted">Last 10 Hours</small>
-                        </div>
-                        <h5 class="danger">Low</h5>
-                        <h3>55%</h3>
-                    </div>
+                    <h2>Current <br> Moisture</h2>
                 </div>
-
+                <div class="div2">
+                    <p id="moistVal">
+                        <%= moistData.data[0].value %>%
+                    </p>
+                    <small class="text-muted" id="timeUpdate">
+                        <%= moistData.data[0].date + " " + moistData.data[0].time %>
+                    </small>
+                </div>
+            </div>
+            <div class="div">
+                <div class="div1">
+                    <div>
+                        <span class="material-icons-sharp">analytics</span>
+                    </div>
+                    <h2>Average Moisture</h2>
+                </div>
+                <div class="div2">
+                    <p id="avg10">
+                        <%= moistData.avg10 %>%
+                    </p>
+                    <p id="avg20">
+                        <%= moistData.avg20 %>%
+                    </p>
+                    <span class="material-icons-sharp">expand_more</span>
+                    <select name="avg-time" id="select" onchange="changeAvg()">
+                        <option value="10">10 last updates</option>
+                        <option value="20">20 last updates</option>
+                    </select>
+                </div>
             </div>
 
         </div>
@@ -238,23 +178,44 @@
     <script src="/js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const labels = [
-            '2/3 15:00:00',
-            '2/3 15:05:00',
-            '2/3 15:10:00',
-            '2/3 15:15:00',
-            '2/3 15:20:00',
-            '2/3 15:25:00',
-            '2/3 15:30:00',
-            '2/3 15:35:00'
-        ];
+        const selectAvg = document.getElementById("select");
+        const avg10 = document.getElementById("avg10");
+        const avg20 = document.getElementById("avg20");
+        function changeAvg() {
+            if (Number(selectAvg.value) === 10) {
+                avg10.classList.remove("hide");
+                avg20.classList.add("hide");
+            } else {
+                avg10.classList.add("hide");
+                avg20.classList.remove("hide");
+            }
+        }
+        changeAvg();
+
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            if (this.responseText) {
+                configTheChart(JSON.parse(this.responseText));
+            }
+        }
+
+        const ana = document.getElementById("ana");
+        ana.addEventListener("click", evaluate);
+
+        function evaluate() {
+            const url = "/getMoist20"
+            xhttp.open("GET", url);
+            xhttp.send();
+        }
+
         const data = {
-            labels: labels,
+            labels: [],
             datasets: [
                 {
                     label: 'Average moisture (%)',
                     backgroundColor: 'rgba(0,0,255,1)',
-                    data: [55, 45, 60, 70, 50, 58, 55, 60],
+                    data: [],
                     borderColor: 'rgba(0,0,255,0.5)',
                     borderWidth: 2,
                     tension: 0.3,
@@ -268,7 +229,7 @@
             options: {
                 plugins: {
                     title: {
-                        display: true,
+                        display: false,
                         text: 'Average Moisture from ... to...'
                     }
                 },
@@ -280,10 +241,79 @@
                 }
             }
         };
-        const tempChar = new Chart(
+        let tempChar = new Chart(
             document.getElementById('moistureChart'),
             config
         );
+
+
+        function configTheChart(moistData) {
+            tempChar.destroy();
+            let labels = [];
+            let values = [];
+            const from = new Date(document.getElementById("from").value);
+            const to = new Date(document.getElementById("to").value);
+            const step = Number(document.getElementById("step").value);
+            const unit = Number(document.getElementById("unit").value);
+            for (let i = from.getTime(); i < to.getTime(); i += step * unit) {
+                const startTime = new Date(i);
+                const label = startTime.getFullYear() + "-" + (startTime.getMonth() + 1) + "-" + startTime.getDate() + " " + startTime.getHours() + ":" + startTime.getMinutes();
+                let avgValue = 0;
+                let count = 0;
+                for (let j = 0; j < moistData.length; j++) {
+                    const data = moistData[j];
+                    const time = new Date(data.date + "T" + data.time);
+                    if (time.getTime() >= i && time.getTime() < (i + step * unit)) {
+                        count++;
+                        avgValue += Number(data.value);
+                    }
+                }
+                if (count) {
+                    avgValue = avgValue / count;
+                }
+                labels.push(label);
+                values.push(avgValue);
+            }
+
+
+            const data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Average moisture (%)',
+                        backgroundColor: 'rgba(0,0,255,1)',
+                        data: values,
+                        borderColor: 'rgba(0,0,255,0.5)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        pointHoverBorderWidth: 10
+                    }
+                ]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    plugins: {
+                        title: {
+                            display: false,
+                            text: 'Average Moisture from ... to...'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            };
+            tempChar = new Chart(
+                document.getElementById('moistureChart'),
+                config
+            );
+        }
+
     </script>
 </body>
 

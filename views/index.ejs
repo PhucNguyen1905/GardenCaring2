@@ -202,8 +202,19 @@
                             <img src="/images//profile-2.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Light System</b> was turned on</p>
-                            <small class="text-muted">Light System</small>
+                            <p>
+                                <b>
+                                    <%= outputData[0].type %> System
+                                </b>
+                                <% if (outputData[0].value==1) { %>
+                                    was turned on
+                                    <% } else { %>
+                                        was turned off
+                                        <% } %>
+                            </p>
+                            <small class="text-muted">
+                                <%= outputData[0].date %>--<%= outputData[0].time %>
+                            </small>
                         </div>
                     </div>
                     <div class="update">
@@ -211,8 +222,19 @@
                             <img src="/images//profile-2.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Dome System</b> was closed</p>
-                            <small class="text-muted">Dome System</small>
+                            <p>
+                                <b>
+                                    <%= outputData[1].type %> System
+                                </b>
+                                <% if (outputData[1].value==1) { %>
+                                    was turned on
+                                    <% } else { %>
+                                        was turned off
+                                        <% } %>
+                            </p>
+                            <small class="text-muted">
+                                <%= outputData[1].date %>--<%= outputData[1].time %>
+                            </small>
                         </div>
                     </div>
                     <div class="update">
@@ -220,8 +242,19 @@
                             <img src="/images//profile-2.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Pump System</b> was turned off</p>
-                            <small class="text-muted">Pump System</small>
+                            <p>
+                                <b>
+                                    <%= outputData[2].type %> System
+                                </b>
+                                <% if (outputData[2].value==1) { %>
+                                    was turned on
+                                    <% } else { %>
+                                        was turned off
+                                        <% } %>
+                            </p>
+                            <small class="text-muted">
+                                <%= outputData[2].date %>--<%= outputData[2].time %>
+                            </small>
                         </div>
                     </div>
 
@@ -236,10 +269,18 @@
                     <div class="right">
                         <div class="ingo">
                             <h3>Average Tempera</h3>
-                            <small class="text-muted">Last 10 Hours</small>
+                            <small class="text-muted">Last 20 updates</small>
                         </div>
-                        <h5 class="success">Safe</h5>
-                        <h3>33 &#8451;</h3>
+                        <% if (avgTemp>= 25 && avgTemp <= 30) { %>
+                                <h5 class="success">Safe</h5>
+                                <% } else if(avgTemp>= 20 && avgTemp <= 35) { %>
+                                        <h5 class="warning">Risky</h5>
+                                        <% } else {%>
+                                            <h5 class="danger">Danger</h5>
+                                            <% } %>
+                                                <h3>
+                                                    <%= avgTemp %> &#8451;
+                                                </h3>
                     </div>
                 </div>
                 <div class="item offline">
@@ -249,10 +290,18 @@
                     <div class="right">
                         <div class="ingo">
                             <h3>Average Moisture</h3>
-                            <small class="text-muted">Last 10 Hours</small>
+                            <small class="text-muted">Last 20 updates</small>
                         </div>
-                        <h5 class="danger">Low</h5>
-                        <h3>55%</h3>
+                        <% if (avgMoise>= 60 && avgTemp <= 70) { %>
+                                <h5 class="success">Safe</h5>
+                                <% } else if(avgMoise>= 50 && avgMoise <= 80) { %>
+                                        <h5 class="warning">Uncomfortable</h5>
+                                        <% } else {%>
+                                            <h5 class="danger">Danger</h5>
+                                            <% } %>
+                                                <h3>
+                                                    <%= avgMoise %> %
+                                                </h3>
                     </div>
                 </div>
 

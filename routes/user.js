@@ -23,5 +23,7 @@ route.get('/register', authController.viewRegister);
 //update table in db
 route.post('/update', updateController.update); //chua su dung
 route.post('/updateAll', updateController.updateAll);
+route.get('/getTemp20', userController.getTemp20);
+route.get('/getMoist20', userController.getMoist20)
 
 module.exports = route;

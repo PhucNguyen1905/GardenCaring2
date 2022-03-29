@@ -45,37 +45,49 @@ main .insights .bigbox{
     grid-column-end: 3;
 }
 
-main .insights .div{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.right{
+    display: flex;
+    flex-direction: column;
 }
 
-main .insights .div .div1{
+.right .div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--color-white);
+    box-shadow: var(--box-shadow);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-3);
+    padding: 20px;
+}
+
+.right .div .div1{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-main .insights .div:first-child .div1 span{
+.right .div:first-child .div1 span{
     background: var(--color-primary);
 }
 
-main .insights .div .div2{
+.right .div .div2{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    position: relative;
 }
 
-main .insights .div .div2 p{
+.right .div .div2 p{
     font-size: 50px;
 }
 
-main .insights .div .div2 small{
+.right .div .div2 small{
     margin: 0px;
 }
 
-main .insights .div .div2 select{
+.right .div .div2 select{
     display: block;
     margin: 0px;
     background: var(--color-info-light);
@@ -84,16 +96,20 @@ main .insights .div .div2 select{
     border-radius: 5px;
 }
 
-main .insights .div:nth-child(2) .div2{
+.right .div:nth-child(2) .div2{
     position: relative;
 }
 
-main .insights .div:nth-child(2) .div2 span{
+.right .div .div2 p.hide{
+    display: none;
+}
+
+.right .div .div2 span{
     background: transparent;
     color: var(--color-dark);
     position: absolute;
-    top: 73px;
-    right: -8px;
+    top: 80px;
+    right: 8px;
     pointer-events: none;
 }
 
@@ -149,7 +165,7 @@ main .insights .bigbox .ana{
     justify-content: center;
 }
 
-main .insights .bigbox .ana .btn{
+main .insights .bigbox .ana button{
     margin-top: 20px;
     display: block;
     padding: 10px;
@@ -161,4 +177,5 @@ main .insights .bigbox .ana .btn{
     color: var(--color-white);
     font-weight: 500;
     margin-bottom: 20px;
+    cursor: pointer;
 }
