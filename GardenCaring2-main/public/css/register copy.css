@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Poppins:wght@300;400;500;600;700;800&family=Raleway&family=Rubik&display=swap');
+
+/* ROOT VARAIBLES    */
+:root { 
+    --color-primary: #7380ec; 
+    --color-danger: #ff7782; 
+    --col-success: #41f1b6; 
+    --color-warning: #ffbb55; 
+    --color-white: #fff; 
+    --color-info-dark: #7d8da1; 
+    --color-info-light: #dce1eb; 
+    --color-dark: #363949; 
+    --color-light: rgba(132, 139, 200, 0.18); 
+    --color-primary-variant: #111e88; 
+    --color-dark-variant: #677483; 
+    --color-background: #f6f6f9; 
+    --card-border-radius: 2rem; 
+    --border-radius-1: 0.4rem; 
+    --border-radius-2: 0.8rem; 
+    --border-radius-3: 1.2rem; 
+    --card-padding: 1.8rem; 
+    --padding-1: 1.2rem; 
+    --box-shadow: 0 2rem 3rem var(--color-light); 
+}
+
+  /* DARK THEME VARAIBLES  */
+.dark-theme-variables { 
+    --color-background: #181a1e; 
+    --color-white: #202528; 
+    --color-dark: #edeffd; 
+    --color-dark-variant: #a3bdcc; 
+    --color-light: rgba(0, 0, 0, 0.4); --box-shadow: 0 2rem 3rem var(--color-light); 
+}
+
+/* =============== my code ==================== */
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-background);
+}
+
+body .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body .logo img{
+    width: 80px;
+}
+
+body .logo h2{
+    font-size: 40px;
+}
+
+body form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    grid-column-gap: 50px;
+    align-items: center;
+    width: 40%;
+    padding: 20px;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-3);
+    background: var(--color-background);
+    color: #fff;
+    margin-bottom: 100px;
+}
+
+body form h1{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--color-dark);
+}
+
+body form .line{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-gap: 10px;
+    align-items: center;
+}
+
+body form .line .col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+body form .line .col input{
+    width: 100%;
+}
+
+body form .line .bigInput{
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+
+body form .line .shortInput{
+    max-width: 250px;
+}
+
+body form div label{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-dark);
+}
+
+body form div input[type=email],
+body form div input[type=password],
+body form div input[type=text]{
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 300;
+    background: var(--color-info-light);
+}
+
+
+body form .sign{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: flex;
+    justify-content: center;
+}
+
+body form .sign button{
+    padding: 10px;
+    margin-top: 20px;
+    background: var(--color-primary);
+    font-size: 15px;
+    font-weight: 600;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    body form{
+        width: 50%;
+    }
+}
+
+@media (max-width: 827px) {
+    body form{
+        width: 60%;
+    }
+}
+
+@media (max-width: 772px) {
+    body form .line{
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+    }
+    body form .line .col{
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+}
+
+@media (max-width: 650px) {
+    body form{
+        width: 80%;
+    }
+}

@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Poppins:wght@300;400;500;600;700;800&family=Raleway&family=Rubik&display=swap');
+
+/* ROOT VARAIBLES    */
+:root { 
+    --color-primary: #7380ec; 
+    --color-danger: #ff7782; 
+    --col-success: #41f1b6; 
+    --color-warning: #ffbb55; 
+    --color-white: #fff; 
+    --color-info-dark: #7d8da1; 
+    --color-info-light: #dce1eb; 
+    --color-dark: #363949; 
+    --color-light: rgba(132, 139, 200, 0.18); 
+    --color-primary-variant: #111e88; 
+    --color-dark-variant: #677483; 
+    --color-background: #f6f6f9; 
+    --card-border-radius: 2rem; 
+    --border-radius-1: 0.4rem; 
+    --border-radius-2: 0.8rem; 
+    --border-radius-3: 1.2rem; 
+    --card-padding: 1.8rem; 
+    --padding-1: 1.2rem; 
+    --box-shadow: 0 2rem 3rem var(--color-light); 
+}
+
+
+
+/* DARK THEME VARAIBLES  */
+  .dark-theme-variables { 
+    --color-background: #181a1e; 
+    --color-white: #202528; 
+    --color-dark: #edeffd; 
+    --color-dark-variant: #a3bdcc; 
+    --color-light: rgba(0, 0, 0, 0.4); --box-shadow: 0 2rem 3rem var(--color-light); 
+    --color-info-light: #7d8da1;
+}
+
+/* ================= CSS cua Truong ============= */
+main .insights{
+    grid-template-columns: repeat(2,1fr);
+}
+
+main .insights .bigbox{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+}
+
+.right .div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--color-white);
+    box-shadow: var(--box-shadow);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-3);
+    padding: 20px;
+}
+
+.right .div .div1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right .div:first-child .div1 span{
+    background: var(--color-primary);
+}
+
+.right .div .div2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+}
+
+.right .div .div2 p{
+    font-size: 50px;
+}
+
+.right .div .div2 small{
+    margin: 0px;
+}
+
+.right .div .div2 select{
+    display: block;
+    margin: 0px;
+    background: var(--color-info-light);
+    padding: 10px;
+    padding-right: 25px;
+    border-radius: 5px;
+}
+
+.right .div:nth-child(2) .div2{
+    position: relative;
+}
+
+.right .div .div2 p.hide{
+    display: none;
+}
+
+.right .div .div2 span{
+    background: transparent;
+    color: var(--color-dark);
+    position: absolute;
+    top: 80px;
+    right: 8px;
+    pointer-events: none;
+}
+
+main .insights .bigbox .dive{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 20px 0px;
+}
+
+main .insights .bigbox .dive .dive1 input{
+    width: 100%;
+    padding: 10px;
+    background: var(--color-info-light);
+    border-radius: 10px;
+}
+
+main .insights .bigbox .divo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+main .insights .bigbox .divo1{
+    position: relative;
+}
+
+main .insights .bigbox .divo1 input{
+    width: 100%;
+    padding: 10px;
+    background: var(--color-info-light);
+    border-radius: 10px;
+}
+
+main .insights .bigbox .divo1 select{
+    width: 100%;
+    padding: 10px;
+    background: var(--color-info-light);
+    border-radius: 10px;
+}
+
+main .insights .bigbox .divo1 span{
+    background: transparent;
+    color: var(--color-dark);
+    position: absolute;
+    right: 0px;
+    top: 15px;
+    pointer-events: none;
+}
+
+main .insights .bigbox .ana{
+    display: flex;
+    justify-content: center;
+}
+
+main .insights .bigbox .ana button{
+    margin-top: 20px;
+    display: block;
+    padding: 10px;
+    background: var(--color-primary);
+    width: 200px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--color-white);
+    font-weight: 500;
+    margin-bottom: 20px;
+    cursor: pointer;
+}

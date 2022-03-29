@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Socket.io -->
+    <script src="socket.io/socket.io.js"></script>
+
+    <script>
+        // Connect to server
+        let socket = io('http://localhost:8080')
+        socket.on('Server-send-gateway-data', data => {
+            $("#temp").append(data)
+        })
+        $(document).ready(function () {
+            $('#btnTemp').click(function () {
+                socket.emit('Client-send-data', {
+                    "type": "temp",
+                    "value": 32
+                })
+            })
+            $('#btnMoist').click(function () {
+                socket.emit('Client-send-data', {
+                    "type": "moist",
+                    "value": 60
+                })
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+    <h1>Socket.io</h1>
+    <button id="btnTemp">Send Temp</button><br>
+    <button id="btnMoist">Send Moist</button><br>
+    <h1>Temp Value: </h1>
+    <h2 id="temp"></h2>
+    <h1>Moist Value: </h1>
+    <h2 id="moist"></h2>
+</body>
+
+</html>
