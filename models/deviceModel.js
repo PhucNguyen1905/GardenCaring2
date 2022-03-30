@@ -44,9 +44,9 @@ exports.submitLimit = (req, res) => {
         sensor = 'Moistsen'
         edge = 'LOWLIMIT'
     }
-    let selectIDSql = 'SELECT ID FROM DEVICE, SENSOR WHERE ID = SENSORID AND TYPE = \'' + sensor + '\''
-    let insertChangelimitSql = 'INSERT INTO changelimit(DEVICEID,type,newvalue) values (?, \'' + req.params.type + '\',?)'
-    let updateSensorSql = 'UPDATE SENSOR SET ' + edge + ' = ? WHERE SENSORID = ?'
+    let selectIDSql = 'SELECT `ID` FROM `DEVICE`, `SENSOR` WHERE `ID` = `SENSORID` AND `TYPE` = \'' + sensor + '\''
+    let insertChangelimitSql = 'INSERT INTO `CHANGELIMIT`(`DEVICEID`,`TYPE`,`NEWVALUE`) VALUES (?, \'' + req.params.type + '\',?)'
+    let updateSensorSql = 'UPDATE `SENSOR` SET ' + edge + ' = ? WHERE `SENSORID` = ?'
     
     connection.query(selectIDSql, (err, ids) => {
         if (!err) {
@@ -72,12 +72,18 @@ function convertTime(timeStr) {
 }
 
 exports.viewLimit = (req, res) => {
-    let selectChangelimitSql = 'SELECT * FROM `changelimit` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
+    let selectChangelimitSql = 'SELECT * FROM `CHANGELIMIT` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
+    let selectSensorSql = 'SELECT `UPLIMIT`, `LOWLIMIT` FROM `SENSOR`'
     connection.query(selectChangelimitSql, (err, rows) => {
         if (!err) {
-            res.render('setlimitation', {
-                rows: rows,
-                convertTime
+            connection.query(selectSensorSql, (err, values) => {
+                if (!err) {
+                    res.render('setlimitation', {
+                        values: values,
+                        rows: rows,
+                        convertTime
+                    });
+                } else { console.log(err); }
             });
         } else { console.log(err); }
     });

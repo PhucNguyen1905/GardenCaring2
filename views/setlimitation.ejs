@@ -60,13 +60,14 @@
                     <div class="bigdiv">
                         <div class="div1">
                             <form method="POST" action="/limit/uptemp">
-                                <input type="text" name="upTemp" placeholder="℃">
+                                <input type="text" name="upTemp" placeholder="<%= values[0].UPLIMIT %> ℃"> 
+                                
                                 <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
                             </form>
                         </div>
                         <div class="div1">
                             <form method="POST" action="/limit/lowtemp">
-                                <input type="text" name="lowTemp" placeholder="℃">
+                                <input type="text" name="lowTemp" placeholder="<%= values[0].LOWLIMIT %> ℃">
                                 <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
                             </form>
                         </div>
@@ -81,13 +82,13 @@
                     <div class="bigdiv">
                         <div class="div1">
                             <form method="POST" action="/limit/upmoist">
-                                <input type="text" name="upMoist" placeholder="%">
+                                <input type="text" name="upMoist" placeholder="<%= values[1].UPLIMIT %> %">
                                 <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
                             </form>
                         </div>
                         <div class="div1">
                             <form method="POST" action="/limit/lowmoist">
-                                <input type="text" name="lowMoist" placeholder="%">
+                                <input type="text" name="lowMoist" placeholder="<%= values[1].LOWLIMIT %> %">
                                 <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
                             </form>
                         </div>
