@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+// For authentication
+const passport = require('passport');
+const session = require('express-session');
 
 require("dotenv").config();
 const app = express();
@@ -17,7 +20,26 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Socket.io section
+// Express session middleware
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}))
+// Passport config
+require('./config/passport')(passport);
+// Passport middlware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+app.get('*', (req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+})
+
+
 
 // Router
 const userRoute = require('./routes/user');
@@ -62,3 +84,4 @@ io.on('connection', client => {
         console.log(client.id + ' disconnected!')
     });
 });
+// Socket.io section

@@ -3,21 +3,25 @@ const route = express.Router();
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const updateController = require('../controllers/updateController');
+const auth = require('../config/auth')
+const isLoggedIn = auth.isLoggedIn;
 
 // Dashboard view
-route.get('/', userController.viewIndex);
+route.get('/', isLoggedIn, userController.viewIndex);
 
 // Temp and Moist view
-route.get('/temp', userController.viewTemp);
-route.get('/moist', userController.viewMoist);
+route.get('/temp', isLoggedIn, userController.viewTemp);
+route.get('/moist', isLoggedIn, userController.viewMoist);
 
 // Device and limit view
-route.get('/device', userController.viewDevice);
-route.get('/limit', userController.viewLimit);
+route.get('/device', isLoggedIn, userController.viewDevice);
+route.get('/limit', isLoggedIn, userController.viewLimit);
 
 
 // Login and Register
 route.get('/login', authController.viewLogin);
+route.post('/login', authController.login);
+route.get('/logout', authController.logout);
 route.get('/register', authController.viewRegister);
 
 //update table in db

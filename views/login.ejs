@@ -15,15 +15,15 @@
         <img src="/images/logo.png" alt="">
         <h2>Garden<span class="primary">Care</span></h2>
     </div>
-    <form action="/login">
+    <form action="/login" method="POST">
         <h1>Login</h1>
         <label for="user">Username:</label>
-        <input type="text" required id="user">
+        <input type="text" required name="username" id="user">
 
         <label for="pwd">Password:</label>
-        <input type="password" required id="pwd">
+        <input type="password" required name="password" id="pwd">
         <div class="sign">
-            <button>Sign In</button>
+            <button type="submit">Sign In</button>
         </div>
         <div class="sign1">
             <a href="">Forgot your password?</a>
