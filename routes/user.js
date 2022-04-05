@@ -16,7 +16,6 @@ route.get('/device', userController.viewDevice);
 route.get('/limit', userController.viewLimit);
 route.post('/limit/:type', userController.submitLimit);
 
-
 // Login and Register
 route.get('/login', authController.viewLogin);
 route.get('/register', authController.viewRegister);

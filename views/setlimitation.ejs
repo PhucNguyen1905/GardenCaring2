@@ -11,6 +11,9 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/limitation.css">
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -50,6 +53,12 @@
         <!-- MAIN SECTION -->
         <main>
             <h1>Set limitation</h1>
+            <% if (alert) { %>
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                    <strong> <%= alert %>  </strong> 
+                  </div>
+            <% } %> 
             <div class="insights">
                 <!-- box SECTION -->
                 <div class="bigbox">
@@ -59,15 +68,15 @@
                     </div>
                     <div class="bigdiv">
                         <div class="div1">
-                            <form method="POST" action="/limit/uptemp">
-                                <input type="text" name="upTemp" placeholder="<%= values[0].UPLIMIT %> ℃"> 
-                                
+                            <form method="POST" action="/limit/uptemp" id="submit-form">
+                                <input type="text" id="upTemp" name="upTemp" placeholder="<%= values[0].UPLIMIT %> ℃"> 
                                 <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
+                                <div class = "form-message"></div>
                             </form>
                         </div>
                         <div class="div1">
-                            <form method="POST" action="/limit/lowtemp">
-                                <input type="text" name="lowTemp" placeholder="<%= values[0].LOWLIMIT %> ℃">
+                            <form method="POST" action="/limit/lowtemp" >
+                                <input type="text" id="lowTemp" name="lowTemp" placeholder="<%= values[0].LOWLIMIT %> ℃">
                                 <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
                             </form>
                         </div>
@@ -81,14 +90,14 @@
                     </div>
                     <div class="bigdiv">
                         <div class="div1">
-                            <form method="POST" action="/limit/upmoist">
-                                <input type="text" name="upMoist" placeholder="<%= values[1].UPLIMIT %> %">
+                            <form method="POST" action="/limit/upmoist" >
+                                <input type="text" id="upMoist" name="upMoist" placeholder="<%= values[1].UPLIMIT %> %">
                                 <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
                             </form>
                         </div>
                         <div class="div1">
-                            <form method="POST" action="/limit/lowmoist">
-                                <input type="text" name="lowMoist" placeholder="<%= values[1].LOWLIMIT %> %">
+                            <form method="POST" action="/limit/lowmoist" >
+                                <input type="text" id="lowMoist" name="lowMoist" placeholder="<%= values[1].LOWLIMIT %> %">
                                 <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
                             </form>
                         </div>
@@ -224,7 +233,16 @@
         </div>
     </div>
     <script src="/js/index.js"></script>
-
+    <script src="/js/setlimit_validator.js"></script>
+    <script>
+        Validator({
+            form: '#submit-form',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isValid('#upTemp'),
+            ]
+        });
+    </script>
 </body>
 
 </html>

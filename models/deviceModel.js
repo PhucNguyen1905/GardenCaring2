@@ -71,7 +71,7 @@ function convertTime(timeStr) {
     return(date);
 }
 
-exports.viewLimit = (req, res) => {
+exports.viewLimit = (req, res, alert) => {
     let selectChangelimitSql = 'SELECT * FROM `CHANGELIMIT` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
     let selectSensorSql = 'SELECT `UPLIMIT`, `LOWLIMIT` FROM `SENSOR`'
     connection.query(selectChangelimitSql, (err, rows) => {
@@ -81,6 +81,7 @@ exports.viewLimit = (req, res) => {
                     res.render('setlimitation', {
                         values: values,
                         rows: rows,
+                        alert: alert,
                         convertTime
                     });
                 } else { console.log(err); }
