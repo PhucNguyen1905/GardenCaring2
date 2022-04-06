@@ -47,14 +47,32 @@ exports.submitLimit = (req, res) => {
     let selectIDSql = 'SELECT `ID` FROM `DEVICE`, `SENSOR` WHERE `ID` = `SENSORID` AND `TYPE` = \'' + sensor + '\''
     let insertChangelimitSql = 'INSERT INTO `CHANGELIMIT`(`DEVICEID`,`TYPE`,`NEWVALUE`) VALUES (?, \'' + req.params.type + '\',?)'
     let updateSensorSql = 'UPDATE `SENSOR` SET ' + edge + ' = ? WHERE `SENSORID` = ?'
+    let selectChangelimitSql = 'SELECT * FROM `CHANGELIMIT` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
+    let selectSensorSql = 'SELECT `UPLIMIT`, `LOWLIMIT` FROM `SENSOR`'
     
     connection.query(selectIDSql, (err, ids) => {
         if (!err) {
             connection.query(insertChangelimitSql,[ids[0].ID, value], (err, rows) => {
-                if (err) { console.log(err); }
-            });
-            connection.query(updateSensorSql,[value, ids[0].ID], (err, rows) => {
-                if (err) { console.log(err); }
+                if (!err) {
+                    connection.query(updateSensorSql,[value, ids[0].ID], (err, rows) => {
+                        if (!err) {
+                            connection.query(selectChangelimitSql, (err, rows) => {
+                                if (!err) {
+                                    connection.query(selectSensorSql, (err, values) => {
+                                        if (!err) {
+                                            res.render('setlimitation', {
+                                                values: values,
+                                                rows: rows,
+                                                alert: 'Update successfully!',
+                                                convertTime
+                                            });
+                                        } else { console.log(err); }
+                                    });
+                                } else { console.log(err); }
+                            });
+                        } else { console.log(err); }
+                    });
+                } else { console.log(err); }
             });
         } else { console.log(err); }
     });

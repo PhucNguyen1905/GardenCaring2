@@ -172,3 +172,8 @@ main .recent-changes a{
 .closebtn:hover {
     color: black;
 }
+
+.form-message {
+    font-size: 13px;
+    color: red;
+}

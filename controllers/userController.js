@@ -175,6 +175,6 @@ exports.viewLimit = (req, res) => {
 
 exports.submitLimit = (req, res) => {
     deviceModel.submitLimit(req, res)
-    deviceModel.viewLimit(req,res,'Update successfully!')
+    //deviceModel.viewLimit(req,res,'Update successfully!')
 }
 
