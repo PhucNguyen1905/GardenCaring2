@@ -11,6 +11,9 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/limitation.css">
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -50,6 +53,12 @@
         <!-- MAIN SECTION -->
         <main>
             <h1>Set limitation</h1>
+            <% if (alert) { %>
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                    <strong> <%= alert %>  </strong> 
+                  </div>
+            <% } %> 
             <div class="insights">
                 <!-- box SECTION -->
                 <div class="bigbox">
@@ -59,12 +68,18 @@
                     </div>
                     <div class="bigdiv">
                         <div class="div1">
-                            <input type="text" placeholder="℃">
-                            <a href="" class="btn">CHANGE UPPER LIMIT</a>
+                            <form method="POST" action="/limit/uptemp" id="uptemp-form">
+                                <div class = "form-message"></div>
+                                <input type="text" id="upTemp" name="upTemp" placeholder="<%= values[0].UPLIMIT %> ℃"> 
+                                <button class="btn " type= "submit" >CHANGE UPPER LIMIT</button>
+                            </form>
                         </div>
                         <div class="div1">
-                            <input type="text" placeholder="℃">
-                            <a href="" class="btn">CHANGE LOWER LIMIT</a>
+                            <form method="POST" action="/limit/lowtemp" id="lowtemp-form">
+                                <div class = "form-message"></div>
+                                <input type="text" id="lowTemp" name="lowTemp" placeholder="<%= values[0].LOWLIMIT %> ℃">
+                                <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
+                            </form>
                         </div>
                     </div>
 
@@ -76,12 +91,18 @@
                     </div>
                     <div class="bigdiv">
                         <div class="div1">
-                            <input type="text" placeholder="%">
-                            <a href="" class="btn">CHANGE UPPER LIMIT</a>
+                            <form method="POST" action="/limit/upmoist" id="upmoist-form">
+                                <div class = "form-message"></div>
+                                <input type="text" id="upMoist" name="upMoist" placeholder="<%= values[1].UPLIMIT %> %">
+                                <button class="btn" type= "submit">CHANGE UPPER LIMIT</button>
+                            </form>
                         </div>
                         <div class="div1">
-                            <input type="text" placeholder="%">
-                            <a href="" class="btn">CHANGE LOWER LIMIT</a>
+                            <form method="POST" action="/limit/lowmoist" id="lowmoist-form">
+                                <div class = "form-message"></div>
+                                <input type="text" id="lowMoist" name="lowMoist" placeholder="<%= values[1].LOWLIMIT %> %">
+                                <button class="btn" type= "submit">CHANGE LOWER LIMIT</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -96,23 +117,36 @@
                             <th>Data</th>
                             <th>Edge</th>
                             <th>Value</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Temperature</td>
-                            <td>Upper limitation</td>
-
-                            <td>32℃</td>
-                        </tr>
-                        <tr>
-                            <td>Moisture</td>
-                            <td>Upper limitation</td>
-                            <td>80%</td>
-                        </tr>
+                        <% for( let index = 0; index < rows.length; index++ ) { %>
+                            <tr>
+                                <% if (rows[index].TYPE == "uptemp") { %>
+                                    <td>Temperature</td>
+                                    <td>Upper limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>℃</td>
+                                <% } else if (rows[index].TYPE == "lowtemp") { %>
+                                    <td>Temperature</td>
+                                    <td>Lower limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>℃</td>
+                                <% } else if (rows[index].TYPE == "upmoist") { %>
+                                    <td>Moisture</td>
+                                    <td>Upper limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>%</td>
+                                <% } else if (rows[index].TYPE == "lowmoist") { %>
+                                    <td>Moisture</td>
+                                    <td>Lower limitation</td>
+                                    <td><%= rows[index].NEWVALUE %>%</td>
+                                <% } %> 
+                                <td><%= convertTime(rows[index].TIMEUPDATE) %></td>
+                            </tr>
+                        <% } %>
+                        
                     </tbody>
                 </table>
-                <a href="#">Show all</a>
+                <!-- <a href="#">Show all</a> -->
             </div>
         </main>
 
@@ -202,7 +236,37 @@
         </div>
     </div>
     <script src="/js/index.js"></script>
-
+    <script src="/js/setlimit_validator.js"></script>
+    <script>
+        Validator({
+            form: '#uptemp-form',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.checkUpperLimit('#upTemp', "<%= values[0].LOWLIMIT %>", "The upper limit cannot be lower than the lower limit."),
+            ]
+        });
+        Validator({
+            form: '#lowtemp-form',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.checkLowerLimit('#lowTemp', "<%= values[0].UPLIMIT %>", "The lower limit cannot be higher than the upper limit."),
+            ]
+        });
+        Validator({
+            form: '#upmoist-form',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.checkUpperLimit('#upMoist', "<%= values[1].LOWLIMIT %>", "The upper limit cannot be lower than the lower limit."),
+            ]
+        });
+        Validator({
+            form: '#lowmoist-form',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.checkLowerLimit('#lowMoist', "<%= values[1].UPLIMIT %>", "The lower limit cannot be higher than the upper limit."),
+            ]
+        });
+    </script>
 </body>
 
 </html>

@@ -26,3 +26,84 @@ exports.getDeviceByType = (deviceType) => {
     })
     return promise;
 }
+
+exports.submitLimit = (req, res) => {
+    var sensor = 'Tempsen'
+    var edge = 'UPLIMIT'
+    var value = 0
+    if (req.params.type == "uptemp") {
+        value = req.body.upTemp
+    } else if (req.params.type == "lowtemp") {
+        value = req.body.lowTemp
+        edge = 'LOWLIMIT'
+    } else if (req.params.type == "upmoist") {
+        value = req.body.upMoist
+        sensor = 'Moistsen'
+    } else if (req.params.type == "lowmoist") {
+        value = req.body.lowMoist
+        sensor = 'Moistsen'
+        edge = 'LOWLIMIT'
+    }
+    let selectIDSql = 'SELECT `ID` FROM `DEVICE`, `SENSOR` WHERE `ID` = `SENSORID` AND `TYPE` = \'' + sensor + '\''
+    let insertChangelimitSql = 'INSERT INTO `CHANGELIMIT`(`DEVICEID`,`TYPE`,`NEWVALUE`) VALUES (?, \'' + req.params.type + '\',?)'
+    let updateSensorSql = 'UPDATE `SENSOR` SET ' + edge + ' = ? WHERE `SENSORID` = ?'
+    let selectChangelimitSql = 'SELECT * FROM `CHANGELIMIT` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
+    let selectSensorSql = 'SELECT `UPLIMIT`, `LOWLIMIT` FROM `SENSOR`'
+    
+    connection.query(selectIDSql, (err, ids) => {
+        if (!err) {
+            connection.query(insertChangelimitSql,[ids[0].ID, value], (err, rows) => {
+                if (!err) {
+                    connection.query(updateSensorSql,[value, ids[0].ID], (err, rows) => {
+                        if (!err) {
+                            connection.query(selectChangelimitSql, (err, rows) => {
+                                if (!err) {
+                                    connection.query(selectSensorSql, (err, values) => {
+                                        if (!err) {
+                                            res.render('setlimitation', {
+                                                values: values,
+                                                rows: rows,
+                                                alert: 'Update successfully!',
+                                                convertTime
+                                            });
+                                        } else { console.log(err); }
+                                    });
+                                } else { console.log(err); }
+                            });
+                        } else { console.log(err); }
+                    });
+                } else { console.log(err); }
+            });
+        } else { console.log(err); }
+    });
+}
+
+function convertTime(timeStr) {
+    var date = new Date(timeStr);
+    date = date.getUTCFullYear() + '-' +
+        ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
+        ('00' + date.getUTCDate()).slice(-2) + ' ' + 
+        ('00' + (date.getUTCHours()+7)).slice(-2) + ':' + 
+        ('00' + date.getUTCMinutes()).slice(-2) + ':' +
+        ('00' + date.getUTCSeconds()).slice(-2);
+    return(date);
+}
+
+exports.viewLimit = (req, res, alert) => {
+    let selectChangelimitSql = 'SELECT * FROM `CHANGELIMIT` ORDER BY `TIMEUPDATE` DESC LIMIT 5'
+    let selectSensorSql = 'SELECT `UPLIMIT`, `LOWLIMIT` FROM `SENSOR`'
+    connection.query(selectChangelimitSql, (err, rows) => {
+        if (!err) {
+            connection.query(selectSensorSql, (err, values) => {
+                if (!err) {
+                    res.render('setlimitation', {
+                        values: values,
+                        rows: rows,
+                        alert: alert,
+                        convertTime
+                    });
+                } else { console.log(err); }
+            });
+        } else { console.log(err); }
+    });
+}
