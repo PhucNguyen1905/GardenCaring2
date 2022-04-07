@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2022 at 10:12 AM
+-- Generation Time: Apr 07, 2022 at 02:32 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -110,6 +110,36 @@ CREATE TABLE `update` (
   `CHANGE` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `update`
+--
+
+INSERT INTO `update` (`DEVICEID`, `TIMEUPDATE`, `CHANGE`) VALUES
+(1, '2022-03-29 02:22:22', 'Light On'),
+(1, '2022-03-29 02:22:24', 'Light Off'),
+(1, '2022-03-29 02:23:12', 'Light On'),
+(1, '2022-03-29 02:23:18', 'Light Off'),
+(1, '2022-03-29 02:24:42', 'Light On'),
+(1, '2022-03-29 02:24:45', 'Light Off'),
+(1, '2022-03-29 02:28:19', 'Light On'),
+(1, '2022-03-29 02:28:27', 'Light Off'),
+(1, '2022-03-31 11:52:40', 'Light On'),
+(1, '2022-03-31 11:52:43', 'Light Off'),
+(1, '2022-03-31 12:11:53', 'Light On'),
+(1, '2022-03-31 12:11:54', 'Light Off'),
+(1, '2022-03-31 12:12:05', 'Light On'),
+(1, '2022-03-31 12:12:12', 'Light Off'),
+(2, '2022-03-29 02:22:31', 'Pump On'),
+(2, '2022-03-29 02:22:45', 'Pump Off'),
+(2, '2022-03-29 02:22:52', 'Pump On'),
+(2, '2022-03-29 02:23:07', 'Pump Off'),
+(2, '2022-03-29 02:24:47', 'Pump On'),
+(2, '2022-03-29 02:24:49', 'Pump Off'),
+(2, '2022-03-29 02:28:49', 'Pump On'),
+(2, '2022-03-29 02:28:57', 'Pump Off'),
+(2, '2022-03-29 02:29:03', 'Pump On'),
+(2, '2022-03-29 02:29:13', 'Pump Off');
+
 -- --------------------------------------------------------
 
 --
@@ -124,15 +154,16 @@ CREATE TABLE `user` (
   `ADDRESS` varchar(500) NOT NULL,
   `FNAME` varchar(100) NOT NULL,
   `LNAME` varchar(100) NOT NULL,
-  `PHONE` varchar(20) NOT NULL
+  `PHONE` varchar(20) NOT NULL,
+  `PASSWORD` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `ADAKEY`, `ADANAME`, `GMAIL`, `ADDRESS`, `FNAME`, `LNAME`,`PHONE`) VALUES
-(1, 'aio_DDdA88zcsN2lN3b7sVZNqFLdjZeO', 'PhucBKU', 'user1@gmail.com', '268 Lý Thường Kiệt, Phường 14, Quận 10, Thành phố Hồ Chí Minh', 'Phuc', 'Nguyen','0388542487');
+INSERT INTO `user` (`ID`, `ADAKEY`, `ADANAME`, `GMAIL`, `ADDRESS`, `FNAME`, `LNAME`, `PHONE`, `PASSWORD`) VALUES
+(1, 'aio_DDdA88zcsN2lN3b7sVZNqFLdjZeO', 'PhucBKU', 'user1@gmail.com', '268 Lý Thường Kiệt, Phường 14, Quận 10, Thành phố Hồ Chí Minh', 'Phuc', 'Nguyen', '0388542487', '123456');
 
 --
 -- Indexes for dumped tables
