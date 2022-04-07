@@ -242,7 +242,7 @@
             form: '#uptemp-form',
             errorSelector: '.form-message',
             rules: [
-                Validator.checkUpperLimit('#upTemp', "<%= values[0].LOWLIMIT %>", "Upper limit cannot be lower than lower limit."),
+                Validator.checkUpperLimit('#upTemp', "<%= values[0].LOWLIMIT %>", "The upper limit cannot be lower than the lower limit."),
             ]
         });
         Validator({
@@ -256,7 +256,7 @@
             form: '#upmoist-form',
             errorSelector: '.form-message',
             rules: [
-                Validator.checkUpperLimit('#upMoist', "<%= values[1].LOWLIMIT %>", "Upper limit cannot be lower than lower limit."),
+                Validator.checkUpperLimit('#upMoist', "<%= values[1].LOWLIMIT %>", "The upper limit cannot be lower than the lower limit."),
             ]
         });
         Validator({
