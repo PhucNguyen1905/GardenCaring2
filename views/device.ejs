@@ -19,29 +19,10 @@
     <script>
         // Connect to server
         let socket = io('http://localhost:8080')
-        // socket.on('Server-send-temp-data', data => {
 
-        // })
-        // socket.on('Server-send-moist-data', data => {
-
-        // })
 
         $(document).ready(function () {
-            // if (lightData[0] == 1) {
-            //     $('#lightCheck').prop('checked', true);
-            // } else {
-            //     $('#lightCheck').prop('checked', false);
-            // }
-            // if (pumpData[0] == 5) {
-            //     $('#pumpCheck').prop('checked', true);
-            // } else {
-            //     $('#pumpCheck').prop('checked', false);
-            // }
-            // if (domeData[0] == 7) {
-            //     $('#domeCheck').prop('checked', true);
-            // } else {
-            //     $('#domeCheck').prop('checked', false);
-            // }
+
         })
     </script>
 </head>
@@ -94,7 +75,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input id="lightCheck" type="checkbox" <%=lightData[0]==1? 'checked' :'' %> >
+                        <input id="lightCheck" type="checkbox" <%=lightData[0]['value']==1? 'checked' :'' %> >
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -142,7 +123,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input type="checkbox" id="pumpCheck" <%=pumpData[0]==5? 'checked' :'' %>>
+                        <input type="checkbox" id="pumpCheck" <%=pumpData[0]['value']==5? 'checked' :'' %>>
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -200,7 +181,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <a href="#">Show all</a>
             </div>
 
             <!-- List of Domes -->
@@ -214,7 +194,7 @@
                     <h3>Select All</h3>
                     <h3>Turn ON/OFF: </h3>
                     <label class="switch">
-                        <input type="checkbox" id="domeCheck" <%=domeData[0]==3? 'checked' :'' %>>
+                        <input type="checkbox" id="domeCheck" <%=domeData[0]['value']==3? 'checked' :'' %>>
                         <span class="slider round"></span>
                     </label>
                     <h3>Auto Mode: </h3>
@@ -272,7 +252,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <a href="#">Show all</a>
             </div>
 
         </main>
@@ -292,7 +271,7 @@
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="/images/profile-1.jpg" alt="">
+                        <img src="/images//profile-1.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -301,29 +280,62 @@
                 <div class="updates">
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="/images/profile-2.jpg" alt="">
+                            <img src="/images//profile-2.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Light System</b> was turned on</p>
-                            <small class="text-muted">Light System</small>
+                            <p>
+                                <b>
+                                    <%= outputData[0].type %> System
+                                </b>
+                                <% if (outputData[0].value==1) { %>
+                                    was turned on
+                                    <% } else { %>
+                                        was turned off
+                                        <% } %>
+                            </p>
+                            <small class="text-muted">
+                                <%= outputData[0].date %>--<%= outputData[0].time %>
+                            </small>
                         </div>
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="/images/profile-2.jpg" alt="">
+                            <img src="/images//profile-2.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Dome System</b> was closed</p>
-                            <small class="text-muted">Dome System</small>
+                            <p>
+                                <b>
+                                    <%= outputData[1].type %> System
+                                </b>
+                                <% if (outputData[1].value==1) { %>
+                                    was turned on
+                                    <% } else { %>
+                                        was turned off
+                                        <% } %>
+                            </p>
+                            <small class="text-muted">
+                                <%= outputData[1].date %>--<%= outputData[1].time %>
+                            </small>
                         </div>
                     </div>
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="/images/profile-2.jpg" alt="">
+                            <img src="/images//profile-2.jpg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Pump System</b> was turned off</p>
-                            <small class="text-muted">Pump System</small>
+                            <p>
+                                <b>
+                                    <%= outputData[2].type %> System
+                                </b>
+                                <% if (outputData[2].value==1) { %>
+                                    was turned on
+                                    <% } else { %>
+                                        was turned off
+                                        <% } %>
+                            </p>
+                            <small class="text-muted">
+                                <%= outputData[2].date %>--<%= outputData[2].time %>
+                            </small>
                         </div>
                     </div>
 
@@ -338,10 +350,18 @@
                     <div class="right">
                         <div class="ingo">
                             <h3>Average Tempera</h3>
-                            <small class="text-muted">Last 10 Hours</small>
+                            <small class="text-muted">Last 20 updates</small>
                         </div>
-                        <h5 class="success">Safe</h5>
-                        <h3>33 &#8451;</h3>
+                        <% if (avgTemp>= 25 && avgTemp <= 35) { %>
+                                <h5 class="success">Safe</h5>
+                                <% } else if(avgTemp>= 20 && avgTemp <= 40) { %>
+                                        <h5 class="warning">Risky</h5>
+                                        <% } else {%>
+                                            <h5 class="danger">Danger</h5>
+                                            <% } %>
+                                                <h3>
+                                                    <%= avgTemp %> &#8451;
+                                                </h3>
                     </div>
                 </div>
                 <div class="item offline">
@@ -351,10 +371,18 @@
                     <div class="right">
                         <div class="ingo">
                             <h3>Average Moisture</h3>
-                            <small class="text-muted">Last 10 Hours</small>
+                            <small class="text-muted">Last 20 updates</small>
                         </div>
-                        <h5 class="danger">Low</h5>
-                        <h3>55%</h3>
+                        <% if (avgMoise>= 60 && avgTemp <= 70) { %>
+                                <h5 class="success">Safe</h5>
+                                <% } else if(avgMoise>= 50 && avgMoise <= 80) { %>
+                                        <h5 class="warning">Risky</h5>
+                                        <% } else {%>
+                                            <h5 class="danger">Danger</h5>
+                                            <% } %>
+                                                <h3>
+                                                    <%= avgMoise %> %
+                                                </h3>
                     </div>
                 </div>
 

@@ -1,4 +1,5 @@
 const axios = require('axios');
+const res = require('express/lib/response');
 const deviceModel = require('../models/deviceModel');
 
 // Later we will get adaname through MySQL
@@ -43,6 +44,11 @@ function sortData(lightData, pumpData, domeData) {
 }
 
 // View homepage
+exports.viewHome = (req, res) => {
+    res.render('home');
+}
+
+// View index
 exports.viewIndex = (req, res) => {
     (async () => {
 
@@ -262,7 +268,7 @@ exports.viewDevice = (req, res) => {
     (async () => {
 
         try {
-            const lightData = await axios.get(lightAPI)
+            const tempData = await axios.get(tempAPI)
                 .then(function (res) {
                     let value = parseInt(res.data[0].value)
                     let time = foramtTime(res.data[0].created_at)
@@ -272,35 +278,109 @@ exports.viewDevice = (req, res) => {
                     data.push(time)
                     data.push(date)
                     return data
+                })
+            const moistData = await axios.get(moistAPI)
+                .then(function (res) {
+                    let value = (parseInt(res.data[0].value) / 1023 * 100).toFixed(1);
+                    let time = foramtTime(res.data[0].created_at)
+                    let date = res.data[0].created_at.slice(0, 10)
+                    let data = []
+                    data.push(value)
+                    data.push(time)
+                    data.push(date)
+                    return data
+                })
+            const lightData = await axios.get(lightAPI)
+                .then(function (res) {
+                    let data = [];
+                    for (let index = 0; index < res.data.length; index++) {
+                        const datares = res.data[index];
+                        let value = parseInt(datares.value);
+                        let time = foramtTime(datares.created_at);
+                        let date = datares.created_at.slice(0, 10);
+                        const dataPiece = {
+                            value: value,
+                            time: time,
+                            date: date,
+                            type: "Light"
+                        };
+                        data.push(dataPiece);
+                    }
+                    return data;
                 })
             const pumpData = await axios.get(pumpAPI)
                 .then(function (res) {
-                    let value = parseInt(res.data[0].value)
-                    let time = foramtTime(res.data[0].created_at)
-                    let date = res.data[0].created_at.slice(0, 10)
-                    let data = []
-                    data.push(value)
-                    data.push(time)
-                    data.push(date)
-                    return data
+                    let data = [];
+                    for (let index = 0; index < res.data.length; index++) {
+                        const datares = res.data[index];
+                        let value = parseInt(datares.value);
+                        let time = foramtTime(datares.created_at);
+                        let date = datares.created_at.slice(0, 10);
+                        const dataPiece = {
+                            value: value,
+                            time: time,
+                            date: date,
+                            type: "Pump"
+                        };
+                        data.push(dataPiece);
+                    }
+                    return data;
                 })
-
             const domeData = await axios.get(domeAPI)
                 .then(function (res) {
-                    let value = parseInt(res.data[0].value)
-                    let time = foramtTime(res.data[0].created_at)
-                    let date = res.data[0].created_at.slice(0, 10)
-                    let data = []
-                    data.push(value)
-                    data.push(time)
-                    data.push(date)
-                    return data
+                    let data = [];
+                    for (let index = 0; index < res.data.length; index++) {
+                        const datares = res.data[index];
+                        let value = parseInt(datares.value);
+                        let time = foramtTime(datares.created_at);
+                        let date = datares.created_at.slice(0, 10);
+                        const dataPiece = {
+                            value: value,
+                            time: time,
+                            date: date,
+                            type: "Dome"
+                        };
+                        data.push(dataPiece);
+                    }
+                    return data;
+                })
+            const outputData = sortData(lightData, pumpData, domeData);
+
+            const avgTempData = await axios.get(tempAPI)
+                .then(function (res) {
+                    let data = 0;
+                    for (let index = 0; index < res.data.length; index++) {
+                        const datares = res.data[index];
+                        data = data + Number(datares.value);
+                    }
+                    data = (data) / res.data.length;
+                    data = Number(data.toFixed(1))
+                    return data;
+                })
+
+            const avgMoiseData = await axios.get(moistAPI)
+                .then(function (res) {
+                    let data = 0;
+                    for (let index = 0; index < res.data.length; index++) {
+                        const datares = res.data[index];
+                        data = data + Number(datares.value);
+                    }
+                    data = (data) / res.data.length;
+                    data = data / 1023 * 100;
+                    data = Number(data.toFixed(1));
+
+                    return data;
                 })
 
             res.render('device', {
                 lightData: lightData,
                 pumpData: pumpData,
                 domeData: domeData,
+                tempData: tempData,
+                moistData: moistData,
+                outputData: outputData,
+                avgMoise: avgMoiseData,
+                avgTemp: avgTempData,
                 updateDevice: deviceModel.updateDevice
             });
         } catch (err) {
@@ -312,7 +392,7 @@ exports.viewDevice = (req, res) => {
 
 // View Set limit page
 exports.viewLimit = (req, res) => {
-    deviceModel.viewLimit(req,res, "")
+    deviceModel.viewLimit(req, res, "")
 }
 
 exports.submitLimit = (req, res) => {

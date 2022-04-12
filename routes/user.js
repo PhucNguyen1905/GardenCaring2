@@ -6,8 +6,11 @@ const updateController = require('../controllers/updateController');
 const auth = require('../config/auth')
 const isLoggedIn = auth.isLoggedIn;
 
+// Home view
+route.get('/', userController.viewHome);
+
 // Dashboard view
-route.get('/', isLoggedIn, userController.viewIndex);
+route.get('/index', isLoggedIn, userController.viewIndex);
 
 // Temp and Moist view
 route.get('/temp', isLoggedIn, userController.viewTemp);
@@ -23,6 +26,7 @@ route.get('/login', authController.viewLogin);
 route.post('/login', authController.login);
 route.get('/logout', authController.logout);
 route.get('/register', authController.viewRegister);
+route.post('/register', authController.register);
 
 //update table in db
 route.post('/update', updateController.update); //chua su dung

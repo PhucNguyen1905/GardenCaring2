@@ -20,3 +20,19 @@ exports.getUserByEmail = (email) => {
     })
     return promise;
 }
+
+exports.insertUser = (fname, lname, username, password, phone, address, adaname, adakey) => {
+    let checkMail = 'SELECT * FROM user WHERE GMAIL = ?';
+    connection.query(checkMail, [username], (err, results) => {
+        if (err) throw err;
+        if (results.length !== 0) {
+            return false;
+        } else {
+            let sql = 'INSERT INTO user (ADAKEY, ADANAME, GMAIL, ADDRESS, FNAME, LNAME, PHONE, PASSWORD) VALUES(?,?,?,?,?,?,?,?)'
+            connection.query(sql, [adakey, adaname, username, address, fname, lname, phone, password], (err, rows) => {
+                if (err) throw err;
+                return true;
+            })
+        }
+    })
+}

@@ -15,32 +15,32 @@
         <img src="/images/logo.png" alt="">
         <h2>Garden<span class="primary">Care</span></h2>
     </div>
-    <form action="/register">
+    <form action="/register" method="POST">
         <h1>Register</h1>
         <div class="line">
             <div>
                 <label for="">Name:</label>
             </div>
             <div class="col">
-                <input type="text" id="fname" placeholder="First name">
+                <input type="text" name="fname" placeholder="First name">
 
             </div>
             <div class="col">
-                <input type="text" id="lname" placeholder="Last name">
+                <input type="text" name="lname" placeholder="Last name">
 
             </div>
         </div>
         <div class="line">
             <label for="email">Phone:</label>
-            <input class="bigInput" type="text" name="email" id="email" placeholder="Your phone">
+            <input class="bigInput" type="text" name="phone" id="email" placeholder="Your phone">
         </div>
         <div class="line">
             <label for="address">Address:</label>
-            <input class="bigInput" type="text" id="address" placeholder="Your address">
+            <input class="bigInput" type="text" name="address" placeholder="Your address">
         </div>
         <div class="line">
             <label for="adaname">Ada name:</label>
-            <input class="bigInput" type="text" id="adaname" placeholder="Your ada name">
+            <input class="bigInput" type="text" name="adaname" placeholder="Your ada name">
         </div>
         <div class="line">
             <label for="adakey">Ada key:</label>
@@ -49,11 +49,11 @@
         <br>
         <div class=" line">
             <label for="user">Email:</label>
-            <input class="bigInput " type="email" required id="user" placeholder="Your email">
+            <input class="bigInput " type="email" required name="username" placeholder="Your email">
         </div>
         <div class="line">
             <label for="pwd">Password:</label>
-            <input class="bigInput " type="password" required id="pwd" placeholder="Password">
+            <input class="bigInput " type="password" required name="password" placeholder="Password">
         </div>
         <div class="line">
             <label for="pwd2">Repeat password:</label>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="sign">
-            <button>Submit</button>
+            <button type="submit">Submit</button>
         </div>
     </form>
 </body>

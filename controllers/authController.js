@@ -1,5 +1,5 @@
 const passport = require('passport');
-
+const userModel = require('../models/userModel');
 // View Login page
 exports.viewLogin = (req, res) => {
     res.render('login');
@@ -7,7 +7,7 @@ exports.viewLogin = (req, res) => {
 // POST Login
 exports.login = (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/index',
         failureRedirect: '/login',
         failureFlash: false
     })(req, res, next);
@@ -22,4 +22,19 @@ exports.logout = (req, res) => {
 // View Register page
 exports.viewRegister = (req, res) => {
     res.render('register');
+}
+
+// POST register
+exports.register = (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let fname = req.body.fname;
+    let lname = req.body.lname;
+    let phone = req.body.phone;
+    let address = req.body.address;
+    let adaname = req.body.adaname;
+    let adakey = req.body.adakey;
+
+    userModel.insertUser(fname, lname, username, password, phone, address, adaname, adakey);
+    res.redirect('/login');
 }
